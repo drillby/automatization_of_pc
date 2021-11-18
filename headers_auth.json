@@ -1,0 +1,20 @@
+{
+    "accept": "*/*",
+    "accept-encoding": "gzip, deflate",
+    "accept-language": "cs-CZ,cs;q=0.9,sk;q=0.8",
+    "authorization": "SAPISIDHASH 3c02474b61dd6c4a9b78baea03262b292c82bad6",
+    "content-encoding": "gzip",
+    "content-type": "application/json",
+    "cookie": "CONSENT=YES+shp.gws-20210715-0-RC1.en+FX+427; SEARCH_SAMESITE=CgQIsJMB; OGPC=19024399-1:19022622-1:19022552-1:19022539-1:19026101-2:; OGP=-19024399:-19022622:-19022552:-19026101:; HSID=AFSPa79lkGvYZrsDl; SSID=Ak6_Pno9b4dt7PeIX; APISID=lqbettQ75IvBwQFa/Av31br4r8mIqLWrEK; SAPISID=bKQ9sdnWn2_oyMkJ/AlU4Eb-PH3B6nPrwH; __Secure-1PAPISID=bKQ9sdnWn2_oyMkJ/AlU4Eb-PH3B6nPrwH; __Secure-3PAPISID=bKQ9sdnWn2_oyMkJ/AlU4Eb-PH3B6nPrwH; SID=DAjatGK-dtWsxo9uN08eb1U0LRx2ofWgJ48vIG6BO-ExADBhHm1GurIDByG50u_nFXqw1Q.; __Secure-1PSID=DAjatGK-dtWsxo9uN08eb1U0LRx2ofWgJ48vIG6BO-ExADBhFPJZIvKc4DRsMtjAGDrlRQ.; __Secure-3PSID=DAjatGK-dtWsxo9uN08eb1U0LRx2ofWgJ48vIG6BO-ExADBhgwD10Jh1lbd03CW-5vni1A.; NID=511=C-qw8oP9H-VtsZ52ul-d1g9qnNQY9d8m14QaRBplgAK6cFz8dq9HFrLKmdCYG5nkwq5B1JtbHhyAzXJazjwH1Avl-p3EULqZjMILChKLalassqe9aO15U0bmjosPHMm-uaB8S-jeG_hSpZil8jEu3F9FPF4GDnKjZF8RaAedb5KsHKbKAMt61IJalCvVjjVHYDONpRxHAIt7652Zb94JX1p24nJd2o9E-1o3auhVDlyxtGq3bIYs-TgfDwE0Sg2beVQbqsNXeQN2F_CXxaP8Yo0ZsG34Fb5cVpqLJ7UGOLK9hX6G6fRjyACZ0BIgDf1yE5UK-w0BFzkIjPnmPvnhzzFZiJfhx15qtRqQxYpY2JniB7Qi4A32T2aUBvnCo_EF; 1P_JAR=2021-10-18-17; SIDCC=AJi4QfHvr3Regv0c23Ygc-0g_wpYSMVppP7mDuzw45Z0-pwwTXMDyhKVtrbDao0l2XJufFC5cAQk; __Secure-3PSIDCC=AJi4QfG4_nzilRLtoiMRp_zF_bnqTnOxCNe8yMc5Av5oFGf8UJN_lJYJjdd3r4YT403zHTVJ97I",
+    "origin": "https://music.youtube.com",
+    "referer": "https://ogs.google.com/",
+    "sec-ch-ua": "\"Chromium\";v=\"94\", \"Google Chrome\";v=\"94\", \";Not A Brand\";v=\"99\"",
+    "sec-ch-ua-mobile": "?0",
+    "sec-ch-ua-platform": "\"Windows\"",
+    "sec-fetch-dest": "empty",
+    "sec-fetch-mode": "cors",
+    "sec-fetch-site": "same-site",
+    "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:88.0) Gecko/20100101 Firefox/88.0",
+    "x-client-data": "CIu2yQEIpLbJAQjEtskBCKmdygEIttHKAQjv8ssBCJ75ywEI3YTMAQjmhMwBCLWFzAEI14XMAQ==",
+    "x-goog-authuser": "0"
+}
