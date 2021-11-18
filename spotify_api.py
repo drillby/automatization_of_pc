@@ -1,3 +1,4 @@
+import json
 import tekore as tk
 import subprocess
 import requests
@@ -9,7 +10,7 @@ spotify = tk.Spotify(conf)  # vytvoření Spotify objektu
 spotify.token = user_token  # přidělení uživatelského tokenu objektu spotify
 
 
-def get_top_tracks(number: int = 10):
+def get_top_tracks(number: int = 10) -> None:
     """
     description: Will print the top X tracks of your Spotify account
     params: number = number of top tracks you want to be printed
@@ -25,10 +26,10 @@ def get_top_tracks(number: int = 10):
     for track in tracks.items:
         print(track.name)
 
-    return True
+    return
 
 
-def get_albums(number: int = 10):
+def get_albums(number: int = 10) -> None:
     """
     description: Will print the first X albums in your Spotify library
     params: number = number of albums you want to be printed
@@ -46,10 +47,10 @@ def get_albums(number: int = 10):
         print(i, album.album.name)
         i += 1
 
-    return True
+    return
 
 
-def open_spotify():
+def open_spotify() -> None:
     """
     description: Will open Spotify
     params: None
@@ -58,10 +59,10 @@ def open_spotify():
     spotify_dir = "C:\\Users\\Administrátor\\AppData\\Roaming\\Spotify\\Spotify.exe"
     subprocess.call(spotify_dir)
 
-    return True
+    return
 
 
-def search_artist(param: str):
+def search_artist(param: str) -> json:
     """
     description: Will search for an artist based on the parameter
     params: param = Name of the artist
@@ -76,7 +77,7 @@ def search_artist(param: str):
     return artist
 
 
-def play_artist(artist_name: str, device: str = "MYPC"):
+def play_artist(artist_name: str, device: str = "MYPC") -> None:
     """
     description: Will play an artist based on the parameter
     params: artist_name = Name of the artist
@@ -94,10 +95,10 @@ def play_artist(artist_name: str, device: str = "MYPC"):
         context_uri=artist_uri, device_id=device_id, position_ms=0
     )
 
-    return True
+    return
 
 
-def search_album(param: str):
+def search_album(param: str) -> json:
     """
     description: Will search for an album based on the parameter
     params: param = Name of the album
@@ -112,7 +113,7 @@ def search_album(param: str):
     return album
 
 
-def play_album(album_name: str, device: str = "MYPC"):
+def play_album(album_name: str, device: str = "MYPC") -> None:
     """
     description: Will play an album based on the parameter
     params: album_name = Name of the album
@@ -129,10 +130,10 @@ def play_album(album_name: str, device: str = "MYPC"):
     spotify.playback_start_context(
         context_uri=album_uri, device_id=device_id, position_ms=0
     )
-    return True
+    return
 
 
-def get_devices():
+def get_devices() -> json:
     """
     params: None
     return: JSON object of all conected devices to your account
@@ -149,7 +150,7 @@ def get_devices():
     return devices.json()
 
 
-def play_on_device(device_name: str = "MYPC"):
+def play_on_device(device_name: str = "MYPC") -> int:
     """
     description: Will search for a device based on the parameter¨
     params: Name of the device
@@ -161,7 +162,7 @@ def play_on_device(device_name: str = "MYPC"):
             return device["id"]
 
 
-def search_track(param: str):
+def search_track(param: str) -> json:
     """
     description: Will search for a track based on the parameter
     params: Name of the track
@@ -176,7 +177,7 @@ def search_track(param: str):
     return track
 
 
-def play_track(track_name: str, device: str = "MYPC"):
+def play_track(track_name: str, device: str = "MYPC") -> None:
     """
     description: Will play a track based on the parameter
     params: track_name = Name of the track you want to start playing
@@ -190,10 +191,10 @@ def play_track(track_name: str, device: str = "MYPC"):
     track = search_track(track_name)
     device_id = play_on_device(device)
     spotify.playback_start_tracks([track.id], device_id=device_id, position_ms=0)
-    return True
+    return
 
 
-def shuffle_tracks(boolean: bool = True, device: str = "MYPC"):
+def shuffle_tracks(boolean: bool = True, device: str = "MYPC") -> None:
     """
     description: Will shuffle the tracks
     params: boolean = Whether or not to shuffle
@@ -204,10 +205,10 @@ def shuffle_tracks(boolean: bool = True, device: str = "MYPC"):
     device_id = play_on_device(device)
     spotify.playback_shuffle(boolean, device_id=device_id)
 
-    return True
+    return
 
 
-def add_song_to_queue(track_name: str, device: str = "MYPC"):
+def add_song_to_queue(track_name: str, device: str = "MYPC") -> None:
     """
     description: Will add a track to your Spotify queue
     params: track_name = Name of the album you want to add to the queue
@@ -219,10 +220,10 @@ def add_song_to_queue(track_name: str, device: str = "MYPC"):
     device_id = play_on_device(device)
     spotify.playback_queue_add(uri=track_uri, device_id=device_id)
 
-    return True
+    return
 
 
-def add_album_to_queue(album_name: str, device: str = "MYPC"):
+def add_album_to_queue(album_name: str, device: str = "MYPC") -> None:
     """
     description: Will add a track to your Spotify queue
     params: track_name = Name of the album you want to add to the queue
@@ -234,10 +235,10 @@ def add_album_to_queue(album_name: str, device: str = "MYPC"):
     device_id = play_on_device(device)
     spotify.playback_queue_add(uri=album_uri, device_id=device_id)
 
-    return True
+    return
 
 
-def search_playlist(playlist_name: str):
+def search_playlist(playlist_name: str) -> json:
     """
     description: Will search for a playlist from your Spotify library based on the parameter
     params: playlist_name = The name of the playlist you want to play
@@ -253,7 +254,7 @@ def search_playlist(playlist_name: str):
     return playlist
 
 
-def play_playlist(playlist_name: str, device: str = "MYPC"):
+def play_playlist(playlist_name: str, device: str = "MYPC") -> None:
     """
     description: Will play a playlist from your Spotify library based on the parameter
     params: playlist_name = The name of the playlist you want to play
@@ -270,4 +271,8 @@ def play_playlist(playlist_name: str, device: str = "MYPC"):
         context_uri=playlist.uri, device_id=device_id, position_ms=0
     )
 
-    return True
+    return
+
+
+def get_loudness():
+    pass
