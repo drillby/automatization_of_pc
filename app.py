@@ -15,10 +15,6 @@ def result():
     output = request.form.to_dict()
     text = output["name"]
     device = output["device"]
-    print(device)
-
-    output2 = request.form.to_dict()
-    volume = output2["current_volume"]
 
     text = text.split()
     text[0] = text[0].lower()
@@ -61,7 +57,7 @@ def volume():
 
     spotify_api.change_volume(volume, device)
 
-    return render_template("index.html", volume)
+    return render_template("index.html")
 
 
 if __name__ == "__main__":

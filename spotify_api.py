@@ -90,7 +90,7 @@ def play_artist(artist_name: str, device: str = "MYPC") -> None:
 
     artist = search_artist(artist_name)
     artist_uri = tk.to_uri("artist", artist.id)
-    device_id = play_on_device(device)
+    device_id = get_device_id(device)
     spotify.playback_start_context(
         context_uri=artist_uri, device_id=device_id, position_ms=0
     )
@@ -126,7 +126,7 @@ def play_album(album_name: str, device: str = "MYPC") -> None:
 
     album = search_album(album_name)
     album_uri = tk.to_uri("album", album.id)
-    device_id = play_on_device(device)
+    device_id = get_device_id(device)
     spotify.playback_start_context(
         context_uri=album_uri, device_id=device_id, position_ms=0
     )
@@ -150,7 +150,7 @@ def get_devices() -> json:
     return devices.json()
 
 
-def play_on_device(device_name: str = "MYPC") -> int:
+def get_device_id(device_name: str = "MYPC") -> int:
     """
     description: Will search for a device based on the parameter¨
     params: Name of the device
@@ -182,14 +182,14 @@ def play_track(track_name: str, device: str = "MYPC") -> None:
     description: Will play a track based on the parameter
     params: track_name = Name of the track you want to start playing
             device = Name of the device you want to play the track on (default = MYPC)
-    return: True
+    return: None
     """
     if len(track_name) < 1:
         print("Zadej název alba")
         return
 
     track = search_track(track_name)
-    device_id = play_on_device(device)
+    device_id = get_device_id(device)
     spotify.playback_start_tracks([track.id], device_id=device_id, position_ms=0)
     return
 
@@ -202,7 +202,7 @@ def shuffle_tracks(boolean: bool = True, device: str = "MYPC") -> None:
     note: True = shuffle, False = not shuffle
     return: True
     """
-    device_id = play_on_device(device)
+    device_id = get_device_id(device)
     spotify.playback_shuffle(boolean, device_id=device_id)
 
     return
@@ -217,7 +217,7 @@ def add_song_to_queue(track_name: str, device: str = "MYPC") -> None:
     """
     track = search_track(track_name)
     track_uri = tk.to_uri("track", track.id)
-    device_id = play_on_device(device)
+    device_id = get_device_id(device)
     spotify.playback_queue_add(uri=track_uri, device_id=device_id)
 
     return
@@ -232,7 +232,7 @@ def add_album_to_queue(album_name: str, device: str = "MYPC") -> None:
     """
     album = search_album(album_name)
     album_uri = tk.to_uri("track", album.id)
-    device_id = play_on_device(device)
+    device_id = get_device_id(device)
     spotify.playback_queue_add(uri=album_uri, device_id=device_id)
 
     return
@@ -266,7 +266,7 @@ def play_playlist(playlist_name: str, device: str = "MYPC") -> None:
         return
 
     playlist = search_playlist(playlist_name)
-    device_id = play_on_device(device)
+    device_id = get_device_id(device)
     spotify.playback_start_context(
         context_uri=playlist.uri, device_id=device_id, position_ms=0
     )
@@ -274,8 +274,17 @@ def play_playlist(playlist_name: str, device: str = "MYPC") -> None:
     return
 
 
+def get_device_volume(device_name: str = "MYPC") -> int:
+    """
+    description: Will return the volume of currently playing device
+    params: device name
+    return: Volume of currently playing device in percent
+    """
+    pass
+
+
 def change_volume(volume: int, device: str = "MYPC") -> None:
-    device_id = play_on_device(device)
+    device_id = get_device_id(device)
     spotify.playback_volume(volume, device_id)
 
     return
