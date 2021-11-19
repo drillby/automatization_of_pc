@@ -274,5 +274,8 @@ def play_playlist(playlist_name: str, device: str = "MYPC") -> None:
     return
 
 
-def get_loudness():
-    pass
+def change_volume(volume: int, device: str = "MYPC") -> None:
+    device_id = play_on_device(device)
+    spotify.playback_volume(volume, device_id)
+
+    return

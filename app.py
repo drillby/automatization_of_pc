@@ -17,6 +17,9 @@ def result():
     device = output["device"]
     print(device)
 
+    output2 = request.form.to_dict()
+    volume = output2["current_volume"]
+
     text = text.split()
     text[0] = text[0].lower()
     print(text[0])
@@ -48,6 +51,17 @@ def result():
         spotify_api.add_song_to_queue(song, device)
 
     return render_template("index.html")
+
+
+@app.route("/change_volume", methods=["GET", "POST"])
+def volume():
+    output = request.form.to_dict()
+    volume = output["current_volume"]
+    device = output["device"]
+
+    spotify_api.change_volume(volume, device)
+
+    return render_template("index.html", volume)
 
 
 if __name__ == "__main__":

@@ -35,5 +35,24 @@
       ><br /><br />
       <input class="file_submit" type="Submit" />
     </form>
+    <br />
+    <form action="/change_volume" method="POST">
+      <label for="volume"><h2>Změna hlasitosti:</h2></label><br />
+      <label for="current_volume"
+        >Reproduktor má právě hlasitost {{volume}} %</label
+      >
+      <label for="device"><h2>Zařízení</h2></label>
+      <select name="device" id="device" style="min-width: 150px">
+        <option value="" selected="selected">-</option>
+        <option value="">Altán - není reprák</option>
+        <option value="Living Room">Obývák</option>
+        <option value="Pristavba">Přístavba</option>
+        <option value="Paja pokoj">Pája pokoj</option>
+        <option value="MYPC">MYPC</option>
+        <option value="Podrazký's Echo Dot">Alexa</option></select
+      ><br /><br />
+      <input class="file_submit" type="Submit" />
+    </form>
+    </form>
   </body>
 </html>
