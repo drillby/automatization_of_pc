@@ -297,3 +297,16 @@ def change_volume(volume: int, device: str = "MYPC") -> None:
     spotify.playback_volume(volume, device_id)
 
     return
+
+
+def get_active_device() -> str:
+    """
+    Will return active device
+    params: None
+    return: Name of the active devicee
+    """
+    for device in get_devices()["devices"]:
+        if device["is_active"]:
+            return device["name"]
+
+    return
