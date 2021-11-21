@@ -7,6 +7,7 @@ app = Flask(__name__)
 @app.route("/")
 @app.route("/home")
 def home():
+    spotify_api.get_device_volume()
     return render_template("index.html")
 
 
@@ -41,7 +42,7 @@ def result():
         playlist = " ".join(map(str, text))
         spotify_api.play_playlist(playlist, device)
 
-    if text[0] == "f":
+    if text[0] == "f" or text[0] == "q":
         text.pop(0)
         song = " ".join(map(str, text))
         spotify_api.add_song_to_queue(song, device)
@@ -55,7 +56,8 @@ def volume():
     volume = output["current_volume"]
     device = output["device"]
 
-    spotify_api.change_volume(volume, device)
+    if isinstance(volume, int):
+        spotify_api.change_volume(volume, device)
 
     return render_template("index.html")
 
