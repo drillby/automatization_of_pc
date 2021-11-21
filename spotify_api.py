@@ -276,14 +276,23 @@ def play_playlist(playlist_name: str, device: str = "MYPC") -> None:
 
 def get_device_volume(device_name: str = "MYPC") -> int:
     """
-    description: Will return the volume of currently playing device
-    params: device name
-    return: Volume of currently playing device in percent
+    description: Will search for a device based on the parameter¨
+    params: Name of the device
+    note: Device must be on your LAN
+    return: ID of the device
     """
-    pass
+    for device in get_devices()["devices"]:
+        if device["name"] == device_name:
+            return device["volume_percent"]
 
 
 def change_volume(volume: int, device: str = "MYPC") -> None:
+    """
+    Will set the volume of currently playing device
+    params: volume - desired volume (1-100)
+            device - Name of the device
+    return: None
+    """
     device_id = get_device_id(device)
     spotify.playback_volume(volume, device_id)
 

@@ -1,4 +1,4 @@
 import spotify_api
 
 # spotify_api.play_track("gnat", "")
-spotify_api.add_song_to_queue("v lese")
+print(spotify_api.get_device_volume("MYPC"))
