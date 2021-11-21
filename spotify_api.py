@@ -161,6 +161,8 @@ def get_device_id(device_name: str = "MYPC") -> int:
         if device["name"] == device_name:
             return device["id"]
 
+    return
+
 
 def search_track(param: str) -> json:
     """
@@ -284,6 +286,8 @@ def get_device_volume(device_name: str = "MYPC") -> int:
     for device in get_devices()["devices"]:
         if device["name"] == device_name:
             return device["volume_percent"]
+
+    return
 
 
 def change_volume(volume: int, device: str = "MYPC") -> None:

@@ -7,8 +7,13 @@ app = Flask(__name__)
 @app.route("/")
 @app.route("/home")
 def home():
-    spotify_api.get_device_volume()
+    active_device = spotify_api.get_active_device()
+    if active_device:
+        spotify_api.get_device_volume(active_device)
     return render_template("index.html")
+
+    # Přijít na to jak vypsat hodnotu hlasitosti do html inputu
+    # Přijít na to jak vypsat název zařízenní do html textu
 
 
 @app.route("/run_spotify", methods=["GET", "POST"])
