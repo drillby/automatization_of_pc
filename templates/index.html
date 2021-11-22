@@ -27,7 +27,7 @@
       <select name="device" id="device" style="min-width: 150px">
         <option value="" selected="selected">-</option>
         {%for i in range(num_of_devices)%}
-          <option value={{devices_name[i]}}>{{devices_name[i]}}</option>
+          <option value="{{devices_name[i]}}">{{devices_name[i]}}</option>
         {%endfor%}
       </select>
         <br /><br>
@@ -44,10 +44,9 @@
       <select name="device" id="device" style="min-width: 150px">
         <option value="" selected="selected">-</option>
         {%for i in range(num_of_devices)%}
-          <option value={{devices_name[i]}}>{{devices_name[i]}}</option>
+          <option value="{{devices_name[i]}}">{{devices_name[i]}}</option>
         {%endfor%}
-      </select>
-        <br /><br>
+      </select><br /><br />
       <input class="file_submit" type="Submit" />
     </form>
     </form>

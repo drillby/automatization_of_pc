@@ -211,7 +211,7 @@ def shuffle_tracks(boolean: bool = True, device: str = "MYPC") -> None:
     params: boolean = Whether or not to shuffle
             device = Name of the device you want to shuffle the tracks on (default = MYPC)
     note: True = shuffle, False = not shuffle
-    return: True
+    return: None
     """
     device_id = get_device_id(device)
     spotify.playback_shuffle(boolean, device_id=device_id)
