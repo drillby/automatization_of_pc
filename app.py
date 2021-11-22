@@ -2,6 +2,9 @@ import spotify_api
 from flask import Flask, render_template, request
 
 devices_name = spotify_api.get_all_devices_name()
+active_device = spotify_api.get_active_device()
+if not active_device:
+    active_device = "None"
 
 app = Flask(__name__)
 
@@ -9,12 +12,16 @@ app = Flask(__name__)
 @app.route("/")
 @app.route("/home")
 def home():
-    return render_template(
-        "index.html", num_of_devices=len(devices_name), devices_name=devices_name
-    )
+    active_device = spotify_api.get_active_device()
+    if not active_device:
+        active_device = "None"
 
-    # Přijít na to jak vypsat hodnotu hlasitosti do html inputu
-    # Přijít na to jak vypsat název zařízenní do html textu
+    return render_template(
+        "index.html",
+        num_of_devices=len(devices_name),
+        devices_name=devices_name,
+        active_device=active_device,
+    )
 
 
 @app.route("/run_spotify", methods=["GET", "POST"])
@@ -53,8 +60,15 @@ def result():
         song = " ".join(map(str, text))
         spotify_api.add_song_to_queue(song, device)
 
+    active_device = spotify_api.get_active_device()
+    if not active_device:
+        active_device = "None"
+
     return render_template(
-        "index.html", num_of_devices=len(devices_name), devices_name=devices_name
+        "index.html",
+        num_of_devices=len(devices_name),
+        devices_name=devices_name,
+        active_device=active_device,
     )
 
 
@@ -67,8 +81,15 @@ def volume():
     if isinstance(volume, int):
         spotify_api.change_volume(volume, device)
 
+    active_device = spotify_api.get_active_device()
+    if not active_device:
+        active_device = "None"
+
     return render_template(
-        "index.html", num_of_devices=len(devices_name), devices_name=devices_name
+        "index.html",
+        num_of_devices=len(devices_name),
+        devices_name=devices_name,
+        active_device=active_device,
     )
 
 
