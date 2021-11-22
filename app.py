@@ -1,5 +1,5 @@
 import spotify_api
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, redirect
 
 app = Flask(__name__)
 
@@ -18,11 +18,16 @@ def home():
     if not active_device:
         active_device = "None"
 
+    playing_track = spotify_api.get_currently_playing_track()
+    cover_of_track = spotify_api.get_album_cover_of_playing_track()
+
     return render_template(
         "index.html",
         num_of_devices=len(devices_name),
         devices_name=devices_name,
         active_device=active_device,
+        playing_track=playing_track,
+        cover_of_track=cover_of_track,
     )
 
 
@@ -34,7 +39,6 @@ def result():
 
     text = text.split()
     text[0] = text[0].lower()
-    print(text[0])
 
     if text[0] == "s":
         text.pop(0)
@@ -62,16 +66,7 @@ def result():
         song = " ".join(map(str, text))
         spotify_api.add_song_to_queue(song, device)
 
-    active_device = spotify_api.get_active_device()
-    if not active_device:
-        active_device = "None"
-
-    return render_template(
-        "index.html",
-        num_of_devices=len(devices_name),
-        devices_name=devices_name,
-        active_device=active_device,
-    )
+    return redirect("http://192.168.132.102:8080")
 
 
 @app.route("/change_volume", methods=["GET", "POST"])
@@ -83,16 +78,7 @@ def volume():
     if isinstance(volume, int):
         spotify_api.change_volume(volume, device)
 
-    active_device = spotify_api.get_active_device()
-    if not active_device:
-        active_device = "None"
-
-    return render_template(
-        "index.html",
-        num_of_devices=len(devices_name),
-        devices_name=devices_name,
-        active_device=active_device,
-    )
+    return redirect("http://192.168.132.102:8080")
 
 
 if __name__ == "__main__":

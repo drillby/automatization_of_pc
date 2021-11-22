@@ -336,3 +336,37 @@ def set_active_device(device: str = "MYPC") -> None:
             device["is_active"] = True
 
     return
+
+
+def get_currently_playing_track() -> str:
+    """
+    Will return the currently playing track
+    params: None
+    return: Name of the currently playing track
+    """
+    playing_track = requests.get(
+        "https://api.spotify.com/v1/me/player/currently-playing",
+        headers={
+            "Content-Type": "application/json",
+            "Authorization": f"Bearer {user_token}",
+        },
+    )
+
+    return playing_track.json()["item"]["name"]
+
+
+def get_album_cover_of_playing_track() -> str:
+    """
+    Will return the currently playing track
+    params: None
+    return: Name of the currently playing track
+    """
+    album_cover = requests.get(
+        "https://api.spotify.com/v1/me/player/currently-playing",
+        headers={
+            "Content-Type": "application/json",
+            "Authorization": f"Bearer {user_token}",
+        },
+    )
+
+    return album_cover.json()["item"]["album"]["images"][0]["url"]
