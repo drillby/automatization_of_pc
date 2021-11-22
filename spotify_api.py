@@ -323,3 +323,16 @@ def get_active_device() -> str:
             return device["name"]
 
     return
+
+
+def set_active_device(device: str = "MYPC") -> None:
+    """
+    Will set the active device
+    params: device - Name of the device (default = MYPC)
+    return: None
+    """
+    for device in get_devices()["devices"]:
+        if device["name"] == device:
+            device["is_active"] = True
+
+    return

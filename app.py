@@ -1,12 +1,14 @@
 import spotify_api
 from flask import Flask, render_template, request
 
+app = Flask(__name__)
+
 devices_name = spotify_api.get_all_devices_name()
 active_device = spotify_api.get_active_device()
 if not active_device:
     active_device = "None"
 
-app = Flask(__name__)
+spotify_api.set_active_device()
 
 
 @app.route("/")
