@@ -164,6 +164,15 @@ def get_device_id(device_name: str = "MYPC") -> int:
     return
 
 
+def get_all_devices_name() -> list:
+    devices_name = []
+    devices = get_devices()["devices"]
+    for device in devices:
+        devices_name.append(device["name"])
+
+    return devices_name
+
+
 def search_track(param: str) -> json:
     """
     description: Will search for a track based on the parameter
