@@ -86,7 +86,7 @@ def play_artist(artist_name: str, device: str = "MYPC") -> None:
     return: True
     """
     if len(artist_name) < 1:
-        return ValueError
+        return ValueError("Name must be at least one character long")
 
     if not get_active_device():
         set_active_device()
@@ -124,7 +124,7 @@ def play_album(album_name: str, device: str = "MYPC") -> None:
     return: True
     """
     if len(album_name) < 1:
-        return ValueError
+        return ValueError("Name must be at least one character long")
 
     if not get_active_device():
         set_active_device()
@@ -201,7 +201,7 @@ def play_track(track_name: str, device: str = "MYPC") -> None:
     return: None
     """
     if len(track_name) < 1:
-        return ValueError
+        return ValueError("Name must be at least one character long")
 
     if not get_active_device():
         set_active_device()
@@ -280,7 +280,7 @@ def play_playlist(playlist_name: str, device: str = "MYPC") -> None:
     return: True
     """
     if len(playlist_name) < 1:
-        return ValueError
+        return ValueError("Name must be at least one character long")
 
     if not get_active_device():
         set_active_device()
