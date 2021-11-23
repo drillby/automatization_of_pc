@@ -1,4 +1,5 @@
 import json
+from json.decoder import JSONDecodeError
 import tekore as tk
 import subprocess
 import requests
@@ -85,8 +86,10 @@ def play_artist(artist_name: str, device: str = "MYPC") -> None:
     return: True
     """
     if len(artist_name) < 1:
-        print("Zadej název alba")
-        return
+        return ValueError
+
+    if not get_active_device():
+        set_active_device()
 
     artist = search_artist(artist_name)
     artist_uri = tk.to_uri("artist", artist.id)
@@ -121,8 +124,10 @@ def play_album(album_name: str, device: str = "MYPC") -> None:
     return: True
     """
     if len(album_name) < 1:
-        print("Zadej název alba")
-        return
+        return ValueError
+
+    if not get_active_device():
+        set_active_device()
 
     album = search_album(album_name)
     album_uri = tk.to_uri("album", album.id)
@@ -196,8 +201,10 @@ def play_track(track_name: str, device: str = "MYPC") -> None:
     return: None
     """
     if len(track_name) < 1:
-        print("Zadej název alba")
-        return
+        return ValueError
+
+    if not get_active_device():
+        set_active_device()
 
     track = search_track(track_name)
     device_id = get_device_id(device)
@@ -273,8 +280,10 @@ def play_playlist(playlist_name: str, device: str = "MYPC") -> None:
     return: True
     """
     if len(playlist_name) < 1:
-        print("Zadej název alba")
-        return
+        return ValueError
+
+    if not get_active_device():
+        set_active_device()
 
     playlist = search_playlist(playlist_name)
     device_id = get_device_id(device)
@@ -338,35 +347,25 @@ def set_active_device(device: str = "MYPC") -> None:
     return
 
 
-def get_currently_playing_track() -> str:
+def get_name_and_cover_of_currently_playing_track() -> tuple:
     """
     Will return the currently playing track
     params: None
     return: Name of the currently playing track
     """
-    playing_track = requests.get(
-        "https://api.spotify.com/v1/me/player/currently-playing",
-        headers={
-            "Content-Type": "application/json",
-            "Authorization": f"Bearer {user_token}",
-        },
-    )
 
-    return playing_track.json()["item"]["name"]
+    try:
+        track_info = requests.get(
+            "https://api.spotify.com/v1/me/player/currently-playing",
+            headers={
+                "Content-Type": "application/json",
+                "Authorization": f"Bearer {user_token}",
+            },
+        )
 
-
-def get_album_cover_of_playing_track() -> str:
-    """
-    Will return the currently playing track
-    params: None
-    return: Name of the currently playing track
-    """
-    album_cover = requests.get(
-        "https://api.spotify.com/v1/me/player/currently-playing",
-        headers={
-            "Content-Type": "application/json",
-            "Authorization": f"Bearer {user_token}",
-        },
-    )
-
-    return album_cover.json()["item"]["album"]["images"][0]["url"]
+        return (
+            track_info.json()["item"]["name"],
+            track_info.json()["item"]["album"]["images"][0]["url"],
+        )
+    except JSONDecodeError:
+        return

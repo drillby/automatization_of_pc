@@ -18,8 +18,14 @@ def home():
     if not active_device:
         active_device = "None"
 
-    playing_track = spotify_api.get_currently_playing_track()
-    cover_of_track = spotify_api.get_album_cover_of_playing_track()
+    try:
+        (
+            playing_track,
+            cover_of_track,
+        ) = spotify_api.get_name_and_cover_of_currently_playing_track()
+    except TypeError:
+        playing_track = "None"
+        cover_of_track = "None"
 
     return render_template(
         "index.html",
