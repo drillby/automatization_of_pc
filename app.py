@@ -1,3 +1,4 @@
+import time
 import spotify_api
 from flask import Flask, render_template, request, redirect
 
@@ -15,8 +16,13 @@ spotify_api.set_active_device()
 @app.route("/home")
 def home():
     active_device = spotify_api.get_active_device()
-    if not active_device:
+    if not active_device and not spotify_api.DEVICE_NAME:
         active_device = "None"
+
+    if spotify_api.DEVICE_NAME:
+        active_device = spotify_api.DEVICE_NAME
+
+    time.sleep(1)
 
     try:
         (
@@ -25,7 +31,7 @@ def home():
         ) = spotify_api.get_name_and_cover_of_currently_playing_track()
     except TypeError:
         playing_track = "None"
-        cover_of_track = "None"
+        cover_of_track = "https://upload.wikimedia.org/wikipedia/commons/thumb/1/19/Spotify_logo_without_text.svg/768px-Spotify_logo_without_text.svg.png"
 
     return render_template(
         "index.html",
@@ -42,6 +48,7 @@ def result():
     output = request.form.to_dict()
     text = output["name"]
     device = output["device"]
+    spotify_api.DEVICE_NAME = device
 
     text = text.split()
     text[0] = text[0].lower()
@@ -49,7 +56,7 @@ def result():
     if text[0] == "s":
         text.pop(0)
         song = " ".join(map(str, text))
-        print(song)
+
         spotify_api.play_track(song, device)
 
     elif text[0] == "ar":

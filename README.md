@@ -9,4 +9,4 @@ This project contains some ideas how to automate my work on PC.
 * Dynamicly change text on web page based on volume
 
 ## ISSUES:
-* Changing name of track and cover image is ONLY working for songs (not albums, artists and playlists)
+* So far none

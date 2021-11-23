@@ -369,3 +369,10 @@ def get_name_and_cover_of_currently_playing_track() -> tuple:
         )
     except JSONDecodeError:
         return
+
+
+DEVICE_NAME = ""
+"""
+Workaround for API call
+API call is too slow for immediately showing device name on screen
+"""
