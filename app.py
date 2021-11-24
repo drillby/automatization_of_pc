@@ -53,31 +53,34 @@ def result():
     text = text.split()
     text[0] = text[0].lower()
 
-    if text[0] == "s":
-        text.pop(0)
-        song = " ".join(map(str, text))
+    match text[0]:
+        case "s":
+            text.pop(0)
+            song = " ".join(map(str, text))
+            spotify_api.play_track(song, device)
 
-        spotify_api.play_track(song, device)
+        case "ar":
+            text.pop(0)
+            artist = " ".join(map(str, text))
+            spotify_api.play_artist(artist, device)
 
-    elif text[0] == "ar":
-        text.pop(0)
-        artist = " ".join(map(str, text))
-        spotify_api.play_artist(artist, device)
+        case"al":
+            text.pop(0)
+            album = " ".join(map(str, text))
+            spotify_api.play_album(album, device)
 
-    elif text[0] == "al":
-        text.pop(0)
-        album = " ".join(map(str, text))
-        spotify_api.play_album(album, device)
+        case "p":
+            text.pop(0)
+            playlist = " ".join(map(str, text))
+            spotify_api.play_playlist(playlist, device)
 
-    elif text[0] == "p":
-        text.pop(0)
-        playlist = " ".join(map(str, text))
-        spotify_api.play_playlist(playlist, device)
+        case "f" | "q":
+            text.pop(0)
+            song = " ".join(map(str, text))
+            spotify_api.add_song_to_queue(song, device)
 
-    if text[0] == "f" or text[0] == "q":
-        text.pop(0)
-        song = " ".join(map(str, text))
-        spotify_api.add_song_to_queue(song, device)
+        case _:
+            pass # ignore unknown cases
 
     return redirect("http://192.168.132.102:8080")
 
