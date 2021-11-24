@@ -4,6 +4,7 @@ Author: Pavel Podrazký
 This project contains some ideas how to automate my work on PC.
 
 ## Instalation and setup
+You will need Python 3.10. I'm using structural pattern matching, which is available only in Python 3.10
 Spotify:
 * You need to install the tekore package. See https://tekore.readthedocs.io/en/stable/
 * Also you need to set up tekore.cfg. See https://tekore.readthedocs.io/en/stable/getting_started.html
