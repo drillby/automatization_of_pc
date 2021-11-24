@@ -1,7 +1,13 @@
-# README Automatization of PC
+# Automatization of PC
 Author: Pavel Podrazký
 
 This project contains some ideas how to automate my work on PC.
+
+## Instalation and setup
+Spotify:
+* You need to install the tekore package. See https://tekore.readthedocs.io/en/stable/
+* Also you need to set up tekore.cfg. See https://tekore.readthedocs.io/en/stable/getting_started.html
+* For web server it self I am using the Flask package. 
 
 ## IDEAS:
 * Shell script that will run local server for Spotify and will open wanted web page
