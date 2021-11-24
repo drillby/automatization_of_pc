@@ -4,8 +4,6 @@ import tekore as tk
 import subprocess
 import requests
 
-print("tets")
-
 conf = tk.config_from_file("tekore.cfg", return_refresh=True)  # autorizace Spotify účtu
 user_token = tk.refresh_user_token(*conf[:2], conf[3])
 
