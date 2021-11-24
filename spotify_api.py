@@ -10,6 +10,12 @@ user_token = tk.refresh_user_token(*conf[:2], conf[3])
 spotify = tk.Spotify(conf)  # vytvoření Spotify objektu
 spotify.token = user_token  # přidělení uživatelského tokenu objektu spotify
 
+DEVICE_NAME = ""
+"""
+Workaround for API call
+API call is too slow for immediately showing device name on screen
+"""
+
 
 def get_top_tracks(number: int = 10) -> None:
     """
@@ -369,10 +375,3 @@ def get_name_and_cover_of_currently_playing_track() -> tuple:
         )
     except JSONDecodeError:
         return
-
-
-DEVICE_NAME = ""
-"""
-Workaround for API call
-API call is too slow for immediately showing device name on screen
-"""
