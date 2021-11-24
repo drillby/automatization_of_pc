@@ -1,4 +1,4 @@
-# README Automatization of PC
+# Automatization of PC
 Author: Pavel Podrazký
 
 This project contains some ideas how to automate my work on PC.
