@@ -27,7 +27,6 @@ def get_top_tracks(number: int = 10) -> None:
     for track in tracks.items:
         print(track.name)
 
-    print("hello")
     return
 
 
