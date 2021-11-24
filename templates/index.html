@@ -51,15 +51,15 @@
           <form action="/change_volume" method="POST">
             <label for="volume"><h2>Změna hlasitosti:</h2></label><br />
             <label for="current_volume"
-              >Reproduktor má právě hlasitost - %</label
+              >Reproduktor má právě hlasitost - {{volume_percent}}%</label
             ><br />
             <label for="">Změnit hlasitost na </label
             ><input
               type="number"
               min="1"
               max="100"
-              id="current_volume"
-              name="current_volume"
+              id="desired_volume"
+              name="desired_volume"
             />
             <br /><br /><br /><br /><br /><br />
             <label for="device"><h2>Zařízení</h2></label>

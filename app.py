@@ -22,6 +22,11 @@ def home():
     if spotify_api.DEVICE_NAME:
         active_device = spotify_api.DEVICE_NAME
 
+    if active_device:
+        volume_percent = spotify_api.get_device_volume(active_device)
+    else:
+        volume_percent = "None"
+
     time.sleep(1)
 
     try:
@@ -40,6 +45,7 @@ def home():
         active_device=active_device,
         playing_track=playing_track,
         cover_of_track=cover_of_track,
+        volume_percent = volume_percent
     )
 
 
@@ -88,11 +94,14 @@ def result():
 @app.route("/change_volume", methods=["GET", "POST"])
 def volume():
     output = request.form.to_dict()
-    volume = output["current_volume"]
+    volume = output["desired_volume"]
     device = output["device"]
 
-    if isinstance(volume, int):
+    
+    if volume.isnumeric():
         spotify_api.change_volume(volume, device)
+
+    time.sleep(1)
 
     return redirect("http://192.168.132.102:8080")
 
