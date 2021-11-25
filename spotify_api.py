@@ -1,8 +1,8 @@
 import json
 from json.decoder import JSONDecodeError
 import tekore as tk
-import subprocess
 import requests
+from tekore._model import currently_playing
 
 conf = tk.config_from_file("tekore.cfg", return_refresh=True)  # autorizace Spotify účtu
 user_token = tk.refresh_user_token(*conf[:2], conf[3])
@@ -15,58 +15,6 @@ DEVICE_NAME = ""
 Workaround for API call
 API call is too slow for immediately showing device name on screen
 """
-
-
-def get_top_tracks(number: int = 10) -> None:
-    """
-    description: Will print the top X tracks of your Spotify account
-    params: number = number of top tracks you want to be printed
-    note: default=10, max=50
-    return: True
-    """
-    number = int(number)
-    if number < 1:
-        number = 10
-
-    print(f"Top {number} tracks!")
-    tracks = spotify.current_user_top_tracks(limit=number)
-    for track in tracks.items:
-        print(track.name)
-
-    return
-
-
-def get_albums(number: int = 10) -> None:
-    """
-    description: Will print the first X albums in your Spotify library
-    params: number = number of albums you want to be printed
-    note: default=10, max=50
-    return: True
-    """
-    number = int(number)
-    if number < 1:
-        number = 10
-
-    print(f"Your first {number} albums!")
-    albums = spotify.saved_albums(limit=number)
-    i = 1
-    for album in albums.items:
-        print(i, album.album.name)
-        i += 1
-
-    return
-
-
-def open_spotify() -> None:
-    """
-    description: Will open Spotify
-    params: None
-    return: True
-    """
-    spotify_dir = "C:\\Users\\Administrátor\\AppData\\Roaming\\Spotify\\Spotify.exe"
-    subprocess.call(spotify_dir)
-
-    return
 
 
 def search_artist(param: str) -> json:
@@ -375,3 +323,41 @@ def get_name_and_cover_of_currently_playing_track() -> tuple:
         )
     except JSONDecodeError:
         return
+
+
+def get_ids_for_recomendation() -> tuple:
+    """
+    Will return the currently playing track id
+    params: None
+    return: Id of the currently playing
+    """
+
+    try:
+        track_info = requests.get(
+            "https://api.spotify.com/v1/me/player/currently-playing",
+            headers={
+                "Content-Type": "application/json",
+                "Authorization": f"Bearer {user_token}",
+            },
+        )
+
+        artists = []
+        num_of_artists = len(track_info.json["item"]["artists"])
+        for i in range(num_of_artists):
+            if i <= 5:
+                artists.append(track_info.json()["item"]["artists"][i]["id"])
+
+        return ([track_info.json()["item"]["id"]], artists)
+    except JSONDecodeError:
+        return
+
+
+def get_recomended_songs() -> list:
+    """
+    Will return list of songs based on the currently playing track
+    params: number of songs to return
+    return: list of songs based on the currently playing track
+    """
+
+    currently_playing, _ = id
+    spotify.recommendations()
