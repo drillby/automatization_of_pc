@@ -18,4 +18,5 @@ Spotify:
 * Shell script that will take param and return google search results with given params
 
 ## ISSUES:
-* So far every issue has been fixed
+* Fix adding albums to queue
+* Find out how to get recommended songs from currently playing song
