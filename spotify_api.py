@@ -301,13 +301,12 @@ def set_active_device(device: str = "MYPC") -> None:
     return
 
 
-def get_name_and_cover_of_currently_playing_track() -> tuple:
+def get_currently_playing_track_json() -> json:
     """
-    Will return the currently playing track
+    Will return json of currently playing track
     params: None
-    return: Name of the currently playing track
+    return: json of currently playing track
     """
-
     try:
         track_info = requests.get(
             "https://api.spotify.com/v1/me/player/currently-playing",
@@ -317,12 +316,20 @@ def get_name_and_cover_of_currently_playing_track() -> tuple:
             },
         )
 
-        return (
-            track_info.json()["item"]["name"],
-            track_info.json()["item"]["album"]["images"][0]["url"],
-        )
+        return track_info.json()
     except JSONDecodeError:
         return
+
+
+def get_name_and_cover_of_currently_playing_track() -> tuple:
+    """
+    Will return the currently playing track
+    params: None
+    return: Name of the currently playing track
+    """
+
+    json = get_currently_playing_track_json()
+    return (json["item"]["name"], json["item"]["album"]["images"][0]["url"])
 
 
 def get_ids_for_recomendation() -> tuple:
@@ -331,25 +338,11 @@ def get_ids_for_recomendation() -> tuple:
     params: None
     return: Id of the currently playing
     """
-
-    try:
-        track_info = requests.get(
-            "https://api.spotify.com/v1/me/player/currently-playing",
-            headers={
-                "Content-Type": "application/json",
-                "Authorization": f"Bearer {user_token}",
-            },
-        )
-
-        artists = []
-        num_of_artists = len(track_info.json["item"]["artists"])
-        for i in range(num_of_artists):
-            if i <= 5:
-                artists.append(track_info.json()["item"]["artists"][i]["id"])
-
-        return ([track_info.json()["item"]["id"]], artists)
-    except JSONDecodeError:
-        return
+    artists_id = []
+    json = get_currently_playing_track_json()
+    for i in range(0, len(json["item"]["artists"])):
+        artists_id.append(json["item"]["artists"][i]["id"])
+    return (artists_id, [json["item"]["id"]])
 
 
 def get_recomended_songs() -> list:
@@ -358,6 +351,5 @@ def get_recomended_songs() -> list:
     params: number of songs to return
     return: list of songs based on the currently playing track
     """
-
-    currently_playing, _ = id
-    spotify.recommendations()
+    artists_ids, song_id = get_ids_for_recomendation()
+    return spotify.recommendations(artist_ids=artists_ids, track_ids=song_id)

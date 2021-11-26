@@ -19,4 +19,3 @@ Spotify:
 
 ## ISSUES:
 * Fix adding albums to queue
-* Find out how to get recommended songs from currently playing song
