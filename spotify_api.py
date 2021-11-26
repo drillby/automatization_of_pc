@@ -66,8 +66,8 @@ def search_album(param: str) -> json:
         types=("album",),
         limit=1,
     )
-    album = albums.items[0]
-    return album
+
+    return albums
 
 
 def play_album(album_name: str, device: str = "MYPC") -> None:
@@ -203,11 +203,12 @@ def add_album_to_queue(album_name: str, device: str = "MYPC") -> None:
     return: True
     """
     album = search_album(album_name)
-    album_uri = tk.to_uri("track", album.id)
+    spotify.album_tracks
+    """album_uri = tk.to_uri("track", album.id)
     device_id = get_device_id(device)
-    spotify.playback_queue_add(uri=album_uri, device_id=device_id)
+    spotify.playback_queue_add(uri=album_uri, device_id=device_id)"""
 
-    return
+    return album
 
 
 def search_playlist(playlist_name: str) -> json:
@@ -359,7 +360,7 @@ def get_uris_recomended_songs(num_of_songs: int = 20) -> list:
     return [t.uri for t in recom]
 
 
-def add_more_tracks_to_queue(device: str = "MYPC") -> None:
+def add_recomended_songs_to_queue(device: str = "MYPC") -> None:
     """
     Will add more tracks to the queue
     params: device - Name of the device
@@ -369,3 +370,6 @@ def add_more_tracks_to_queue(device: str = "MYPC") -> None:
     device_id = get_device_id(device)
     for uri in range(len(uris)):
         spotify.playback_queue_add(uri=uris[uri], device_id=device_id)
+
+
+# Možnost úpravy počtu písniček do queue

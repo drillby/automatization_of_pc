@@ -16,6 +16,7 @@ Spotify:
 ## IDEAS:
 * Shell script that will run local server for Spotify and will open wanted web page
 * Shell script that will take param and return google search results with given params
+* Implement adding more song to queue to website
 
 ## ISSUES:
 * Fix adding albums to queue
