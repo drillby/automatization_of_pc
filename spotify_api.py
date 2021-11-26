@@ -1,6 +1,6 @@
 import json
 from json.decoder import JSONDecodeError
-import tekore as tk
+import tekore as tk  # https://tekore.readthedocs.io/en/stable/reference/client.html#
 import requests
 from tekore._model import currently_playing
 
