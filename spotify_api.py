@@ -345,11 +345,27 @@ def get_ids_for_recomendation() -> tuple:
     return (artists_id, [json["item"]["id"]])
 
 
-def get_recomended_songs() -> list:
+def get_uris_recomended_songs(num_of_songs: int = 20) -> list:
     """
     Will return list of songs based on the currently playing track
     params: number of songs to return
     return: list of songs based on the currently playing track
     """
     artists_ids, song_id = get_ids_for_recomendation()
-    return spotify.recommendations(artist_ids=artists_ids, track_ids=song_id)
+    recom = spotify.recommendations(
+        artist_ids=artists_ids, track_ids=song_id, limit=num_of_songs
+    ).tracks
+
+    return [t.uri for t in recom]
+
+
+def add_more_tracks_to_queue(device: str = "MYPC") -> None:
+    """
+    Will add more tracks to the queue
+    params: device - Name of the device
+    return: None
+    """
+    uris = get_uris_recomended_songs()
+    device_id = get_device_id(device)
+    for uri in range(len(uris)):
+        spotify.playback_queue_add(uri=uris[uri], device_id=device_id)
