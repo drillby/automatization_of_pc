@@ -352,6 +352,9 @@ def get_uris_recomended_songs(num_of_songs: int = 20) -> list:
     params: number of songs to return
     return: list of songs based on the currently playing track
     """
+    if num_of_songs < 100:
+        raise ValueError("Number of recommended songs cant be more than 100")
+
     artists_ids, song_id = get_ids_for_recomendation()
     recom = spotify.recommendations(
         artist_ids=artists_ids, track_ids=song_id, limit=num_of_songs
@@ -360,16 +363,18 @@ def get_uris_recomended_songs(num_of_songs: int = 20) -> list:
     return [t.uri for t in recom]
 
 
-def add_recomended_songs_to_queue(device: str = "MYPC") -> None:
+def add_recomended_songs_to_queue(device: str = "MYPC", num_of_songs: int = 20) -> None:
     """
-    Will add more tracks to the queue
+    Will add more tracks to the queue based on recommendation from currently playing song 
     params: device - Name of the device
     return: None
     """
-    uris = get_uris_recomended_songs()
+    uris = get_uris_recomended_songs(num_of_songs)
     device_id = get_device_id(device)
     for uri in range(len(uris)):
         spotify.playback_queue_add(uri=uris[uri], device_id=device_id)
+
+    return
 
 
 # Možnost úpravy počtu písniček do queue
