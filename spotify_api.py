@@ -3,6 +3,7 @@ from json.decoder import JSONDecodeError
 import tekore as tk  # https://tekore.readthedocs.io/en/stable/reference/client.html#
 import requests
 from tekore._model import currently_playing
+from tekore._model.album.full import FullAlbum
 
 conf = tk.config_from_file("tekore.cfg", return_refresh=True)  # autorizace Spotify účtu
 user_token = tk.refresh_user_token(*conf[:2], conf[3])
@@ -228,22 +229,6 @@ def add_song_to_queue(track_name: str, device: str = "MYPC") -> None:
     return
 
 
-def add_album_to_queue(album_name: str, device: str = "MYPC") -> None:
-    """
-    description: Will add a track to your Spotify queue
-    params: track_name = Name of the album you want to add to the queue
-            device = Name of the device where you want to add the track to the queue (default = MYPC)
-    return: True
-    """
-    album = search_album(album_name)
-    spotify.album_tracks
-    """album_uri = tk.to_uri("track", album.id)
-    device_id = get_device_id(device)
-    spotify.playback_queue_add(uri=album_uri, device_id=device_id)"""
-
-    return album
-
-
 def search_playlist(playlist_name: str) -> json:
     """Will search the playlist
 
@@ -289,10 +274,6 @@ def play_playlist(playlist_name: str, device: str = "MYPC") -> None:
     )
 
     return
-
-
-def add_playlist_to_queue(playlist_name: str, device: str = "MYPC") -> None:
-    pass
 
 
 def get_device_volume(device_name: str = "MYPC") -> int:
