@@ -18,10 +18,13 @@ API call is too slow for immediately showing device name on screen
 
 
 def search_artist(param: str) -> json:
-    """
-    description: Will search for an artist based on the parameter
-    params: param = Name of the artist
-    return: JSON object containing info about the artist
+    """Will search for artist
+
+    Args:
+        param (str): name of artist to search
+
+    Returns:
+        json: JSON containing artist information
     """
     (artists,) = spotify.search(
         param,
@@ -33,11 +36,17 @@ def search_artist(param: str) -> json:
 
 
 def play_artist(artist_name: str, device: str = "MYPC") -> None:
-    """
-    description: Will play an artist based on the parameter
-    params: artist_name = Name of the artist
-            device = Name of the device on which the artist will be played (default = MYPC)
-    return: True
+    """Will play artist
+
+    Args:
+        artist_name (str): Name of artist to play
+        device (str, optional): name of the device you want to play on. Defaults to "MYPC".
+
+    Raises:
+        ValueError: if the artist name is less than 1 character long
+
+    Returns:
+        [None]: None
     """
     if len(artist_name) < 1:
         return ValueError("Name must be at least one character long")
@@ -56,10 +65,13 @@ def play_artist(artist_name: str, device: str = "MYPC") -> None:
 
 
 def search_album(param: str) -> json:
-    """
-    description: Will search for an album based on the parameter
-    params: param = Name of the album
-    return: Info about the album
+    """Will search for an album
+
+    Args:
+        param (str): name of album to search
+
+    Returns:
+        json: JSON containing information about the search result
     """
     (albums,) = spotify.search(
         param,
@@ -71,11 +83,17 @@ def search_album(param: str) -> json:
 
 
 def play_album(album_name: str, device: str = "MYPC") -> None:
-    """
-    description: Will play an album based on the parameter
-    params: album_name = Name of the album
-            device = Name of the device on which the album will be played (default = MYPC)
-    return: True
+    """Will play an album
+
+    Args:
+        album_name (str): Name of the album to play
+        device (str, optional): Name of the device you want to play on. Defaults to "MYPC".
+
+    Raises:
+        ValueError: if the album name is less than 1 character long
+
+    Returns:
+        None: None
     """
     if len(album_name) < 1:
         return ValueError("Name must be at least one character long")
@@ -93,10 +111,10 @@ def play_album(album_name: str, device: str = "MYPC") -> None:
 
 
 def get_devices() -> json:
-    """
-    params: None
-    return: JSON object of all conected devices to your account
-    note: Devices must be on your LAN
+    """Will return a list of devices connected to the LAN
+
+    Returns:
+        json: JSON containing information about the devices
     """
     devices = requests.get(
         "https://api.spotify.com/v1/me/player/devices",
@@ -110,11 +128,13 @@ def get_devices() -> json:
 
 
 def get_device_id(device_name: str = "MYPC") -> int:
-    """
-    description: Will search for a device based on the parameter¨
-    params: Name of the device
-    note: Device must be on your LAN
-    return: ID of the device
+    """Will return an id of specific device
+
+    Args:
+        device_name (str, optional): Name of the device you want to get the id. Defaults to "MYPC".
+
+    Returns:
+        int: ID of the device
     """
     for device in get_devices()["devices"]:
         if device["name"] == device_name:
@@ -124,6 +144,11 @@ def get_device_id(device_name: str = "MYPC") -> int:
 
 
 def get_all_devices_name() -> list:
+    """Will return a list of all connected devices
+
+    Returns:
+        list: List containing names of the devices
+    """
     devices_name = []
     devices = get_devices()["devices"]
     for device in devices:
@@ -133,10 +158,13 @@ def get_all_devices_name() -> list:
 
 
 def search_track(param: str) -> json:
-    """
-    description: Will search for a track based on the parameter
-    params: Name of the track
-    return: Info about the track
+    """Will search for track
+
+    Args:
+        param (str): Name of the track you want to search
+
+    Returns:
+        json: JSON containing information about the track
     """
     (tracks,) = spotify.search(
         param,
@@ -148,11 +176,17 @@ def search_track(param: str) -> json:
 
 
 def play_track(track_name: str, device: str = "MYPC") -> None:
-    """
-    description: Will play a track based on the parameter
-    params: track_name = Name of the track you want to start playing
-            device = Name of the device you want to play the track on (default = MYPC)
-    return: None
+    """Will play the specific track
+
+    Args:
+        track_name (str): Name of the track you want to play
+        device (str, optional): Name of the device to play on. Defaults to "MYPC".
+
+    Raises:
+        ValueError: if the track name is less than 1 character long
+
+    Returns:
+        None: None
     """
     if len(track_name) < 1:
         return ValueError("Name must be at least one character long")
@@ -167,12 +201,11 @@ def play_track(track_name: str, device: str = "MYPC") -> None:
 
 
 def shuffle_tracks(boolean: bool = True, device: str = "MYPC") -> None:
-    """
-    description: Will shuffle the tracks
-    params: boolean = Whether or not to shuffle
-            device = Name of the device you want to shuffle the tracks on (default = MYPC)
-    note: True = shuffle, False = not shuffle
-    return: None
+    """Will shuffle the tracks
+
+    Args:
+        boolean (bool, optional): True = shuffle, False = dont shuffle. Defaults to True.
+        device (str, optional): Name of the device to shuffle tracks from. Defaults to "MYPC".
     """
     device_id = get_device_id(device)
     spotify.playback_shuffle(boolean, device_id=device_id)
@@ -181,11 +214,11 @@ def shuffle_tracks(boolean: bool = True, device: str = "MYPC") -> None:
 
 
 def add_song_to_queue(track_name: str, device: str = "MYPC") -> None:
-    """
-    description: Will add a track to your Spotify queue
-    params: track_name = Name of the album you want to add to the queue
-            device = Name of the device where you want to add the track to the queue (default = MYPC)
-    return: True
+    """Will add a song to the queue
+
+    Args:
+        track_name (str): Name of the track to add to the queue
+        device (str, optional): Name of the device you want to add to queue from. Defaults to "MYPC".
     """
     track = search_track(track_name)
     track_uri = tk.to_uri("track", track.id)
@@ -212,10 +245,13 @@ def add_album_to_queue(album_name: str, device: str = "MYPC") -> None:
 
 
 def search_playlist(playlist_name: str) -> json:
-    """
-    description: Will search for a playlist from your Spotify library based on the parameter
-    params: playlist_name = The name of the playlist you want to play
-    return: Info about the playlist
+    """Will search the playlist
+
+    Args:
+        playlist_name (str): Name of the playlist you want to search
+
+    Returns:
+        json: JSON of the playlist
     """
     (playlist,) = spotify.search(
         playlist_name,
@@ -228,11 +264,17 @@ def search_playlist(playlist_name: str) -> json:
 
 
 def play_playlist(playlist_name: str, device: str = "MYPC") -> None:
-    """
-    description: Will play a playlist from your Spotify library based on the parameter
-    params: playlist_name = The name of the playlist you want to play
-            device = Name of the device you want to play the playlist on (default = MYPC)
-    return: True
+    """Will play a playlist
+
+    Args:
+        playlist_name (str): name of the playlist you want to play
+        device (str, optional): name of the device you wan tot play on. Defaults to "MYPC".
+
+    Raises:
+        ValueError: if the playlist name is less than 1 character long
+
+    Returns:
+        [None]: None
     """
     if len(playlist_name) < 1:
         return ValueError("Name must be at least one character long")
@@ -249,12 +291,18 @@ def play_playlist(playlist_name: str, device: str = "MYPC") -> None:
     return
 
 
+def add_playlist_to_queue(playlist_name: str, device: str = "MYPC") -> None:
+    pass
+
+
 def get_device_volume(device_name: str = "MYPC") -> int:
-    """
-    description: Will search for a device based on the parameter¨
-    params: Name of the device
-    note: Device must be on your LAN
-    return: ID of the device
+    """Will return the current device volume
+
+    Args:
+        device_name (str, optional): Name of the device you want to get volume from. Defaults to "MYPC".
+
+    Returns:
+        int: Persentage volume
     """
     for device in get_devices()["devices"]:
         if device["name"] == device_name:
@@ -264,11 +312,11 @@ def get_device_volume(device_name: str = "MYPC") -> int:
 
 
 def change_volume(volume: int, device: str = "MYPC") -> None:
-    """
-    Will set the volume of currently playing device
-    params: volume - desired volume (1-100)
-            device - Name of the device
-    return: None
+    """Will change the volume of the device
+
+    Args:
+        volume (int): Defired volume of the device
+        device (str, optional): Name of the device you want to change volume on. Defaults to "MYPC".
     """
     device_id = get_device_id(device)
     spotify.playback_volume(volume, device_id)
@@ -277,10 +325,10 @@ def change_volume(volume: int, device: str = "MYPC") -> None:
 
 
 def get_active_device() -> str:
-    """
-    Will return active device
-    params: None
-    return: Name of the active devicee
+    """Will return the active devices
+
+    Returns:
+        str: Name of the device that is currently active
     """
     for device in get_devices()["devices"]:
         if device["is_active"]:
@@ -290,10 +338,10 @@ def get_active_device() -> str:
 
 
 def set_active_device(device: str = "MYPC") -> None:
-    """
-    Will set the active device
-    params: device - Name of the device (default = MYPC)
-    return: None
+    """Will set the active device
+
+    Args:
+        device (str, optional): Name of the device you want to set to active. Defaults to "MYPC".
     """
     for device in get_devices()["devices"]:
         if device["name"] == device:
@@ -303,10 +351,10 @@ def set_active_device(device: str = "MYPC") -> None:
 
 
 def get_currently_playing_track_json() -> json:
-    """
-    Will return json of currently playing track
-    params: None
-    return: json of currently playing track
+    """Will return the currently playing track json
+
+    Returns:
+        json: JSON containing the currently playing track information
     """
     try:
         track_info = requests.get(
@@ -323,10 +371,10 @@ def get_currently_playing_track_json() -> json:
 
 
 def get_name_and_cover_of_currently_playing_track() -> tuple:
-    """
-    Will return the currently playing track
-    params: None
-    return: Name of the currently playing track
+    """Will return the name and cover of the currently playing track
+
+    Returns:
+        tuple: (name of the currently playing track, cover of the currently playing track)
     """
 
     json = get_currently_playing_track_json()
@@ -334,10 +382,10 @@ def get_name_and_cover_of_currently_playing_track() -> tuple:
 
 
 def get_ids_for_recomendation() -> tuple:
-    """
-    Will return the currently playing track id
-    params: None
-    return: Id of the currently playing
+    """Will return the tuple containing the ids recommended songs based on the currently playing
+
+    Returns:
+        tuple: IDs of the recommended songs
     """
     artists_id = []
     json = get_currently_playing_track_json()
@@ -347,10 +395,16 @@ def get_ids_for_recomendation() -> tuple:
 
 
 def get_uris_recomended_songs(num_of_songs: int = 20) -> list:
-    """
-    Will return list of songs based on the currently playing track
-    params: number of songs to return
-    return: list of songs based on the currently playing track
+    """Will conver the tuple of recommended ids to uris
+
+    Args:
+        num_of_songs (int, optional): Number of songs you want to convert. Defaults to 20.
+
+    Raises:
+        ValueError: If the number of songs you want to convert is greater than 100
+
+    Returns:
+        list: Contains the recommended uris
     """
     if num_of_songs < 100:
         raise ValueError("Number of recommended songs cant be more than 100")
@@ -364,10 +418,11 @@ def get_uris_recomended_songs(num_of_songs: int = 20) -> list:
 
 
 def add_recomended_songs_to_queue(device: str = "MYPC", num_of_songs: int = 20) -> None:
-    """
-    Will add more tracks to the queue based on recommendation from currently playing song 
-    params: device - Name of the device
-    return: None
+    """Will add recommended song to the queue
+
+    Args:
+        device (str, optional): Name of the device you want to add songs to queue to. Defaults to "MYPC".
+        num_of_songs (int, optional): Number of devices you want to add to queue. Defaults to 20.
     """
     uris = get_uris_recomended_songs(num_of_songs)
     device_id = get_device_id(device)
@@ -375,6 +430,3 @@ def add_recomended_songs_to_queue(device: str = "MYPC", num_of_songs: int = 20) 
         spotify.playback_queue_add(uri=uris[uri], device_id=device_id)
 
     return
-
-
-# Možnost úpravy počtu písniček do queue
