@@ -4,7 +4,7 @@ Author: Pavel Podrazký
 This project contains some ideas how to automate my work on PC.
 
 ## Instalation and setup
-You will need Python 3.10. I'm using structural pattern matching, which is available only in Python 3.10
+You will need Python 3.10+. I'm using structural pattern matching, which is available only from Python 3.10
 
 The server is dynamically getting all of the speakers, but if you want to add new, you have to restart the server.
 
