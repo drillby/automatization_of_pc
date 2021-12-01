@@ -15,7 +15,7 @@
         margin: auto;
       }
       td {
-        width: 40%;
+        width: 30%;
       }
     </style>
   </head>
@@ -44,12 +44,12 @@
               {%endfor%}
             </select>
             <br /><br />
-            <input class="file_submit" type="Submit" />
+            <input class="file_submit" type="Submit" value="Provést" />
           </form>
         </td>
         <td>
           <form action="/change_volume" method="POST">
-            <label for="volume"><h2>Změna hlasitosti:</h2></label><br />
+            <label for="volume"><h2>Změna hlasitosti:</h2></label>
             <label for="current_volume"
               >Reproduktor má právě hlasitost - {{volume_percent}}%</label
             ><br />
@@ -61,7 +61,7 @@
               id="desired_volume"
               name="desired_volume"
             />
-            <br /><br /><br /><br /><br /><br />
+            <br /><br /><br /><br /><br /><br /><br />
             <label for="device"><h2>Zařízení</h2></label>
             <select name="device" id="device" style="min-width: 150px">
               <option value="" selected="selected">-</option>
@@ -69,7 +69,32 @@
               <option value="{{devices_name[i]}}">{{devices_name[i]}}</option>
               {%endfor%}</select
             ><br /><br />
-            <input class="file_submit" type="Submit" />
+            <input class="file_submit" type="submit" value="Změnit hlasitost" />
+          </form>
+        </td>
+        <td>
+          <form action="/add_recomended_songs_to_queue" method="POST">
+            <label for=""><h2>Přidat doporučené písničky do fronty</h2></label>
+            <label for="">Kolik písniček chceš přidat: </label>
+            <input
+              type="number"
+              min="1"
+              max="100"
+              id="num_to_queue"
+              name="num_to_queue"
+            /><br /><br /><br /><br /><br /><br /><br /><br />
+            <label for="device"><h2>Zařízení</h2></label>
+            <select name="device" id="device" style="min-width: 150px">
+              <option value="" selected="selected">-</option>
+              {%for i in range(num_of_devices)%}
+              <option value="{{devices_name[i]}}">{{devices_name[i]}}</option>
+              {%endfor%}</select
+            ><br /><br />
+            <input
+              class="file_submit"
+              type="submit"
+              value="Přidat písničky do fronty"
+            />
           </form>
         </td>
       </tr>

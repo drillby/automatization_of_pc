@@ -387,7 +387,7 @@ def get_uris_recomended_songs(num_of_songs: int = 20) -> list:
     Returns:
         list: Contains the recommended uris
     """
-    if num_of_songs > 100:
+    if int(num_of_songs) > 100:
         raise ValueError("Number of recommended songs cant be more than 100")
 
     artists_ids, song_id = get_ids_for_recomendation()

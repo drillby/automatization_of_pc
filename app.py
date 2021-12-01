@@ -105,6 +105,18 @@ def volume():
 
     return redirect("http://192.168.132.102:8080")
 
+@app.route("/add_recomended_songs_to_queue", methods=["GET", "POST"])
+def add_to_queue():
+    output = request.form.to_dict()
+    device = output["device"]
+    number = output["num_to_queue"]
+    
+    if number.isnumeric():
+        spotify_api.add_recomended_songs_to_queue(device, number)
+    
+    return redirect("http://192.168.132.102:8080")
+
+
 
 if __name__ == "__main__":
     app.run(host="192.168.132.102", port=8080, debug=True)
