@@ -17,6 +17,7 @@ Spotify:
 * Shell script that will run local server for Spotify and will open wanted web page
 * Shell script that will take param and return google search results with given params
 * Create function for creating tekore.cfg
+* Add playing on more devi at once
 
 ## ISSUES:
-* Fix adding albums to queue
+* None
