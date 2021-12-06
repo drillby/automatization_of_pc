@@ -1,11 +1,11 @@
-import json
-from json.decoder import JSONDecodeError
 import tekore as tk  # https://tekore.readthedocs.io/en/stable/reference/client.html#
+import json
 import requests
 from tekore._model.artist import FullArtist
 from tekore._model.playlist import SimplePlaylist
 from tekore._model.track import FullTrack
 from tekore._model.album import SimpleAlbumPaging
+from json.decoder import JSONDecodeError
 
 conf = tk.config_from_file("tekore.cfg", return_refresh=True)  # autorizace Spotify účtu
 user_token = tk.refresh_user_token(*conf[:2], conf[3])
@@ -278,7 +278,7 @@ def play_playlist(playlist_name: str, device: str = "MYPC") -> None:
     return
 
 
-def get_device_volume(device_name: str = "MYPC") -> int:
+def get_device_volume(device_name: str = "MYPC") -> int | None:
     """Will return the current device volume
 
     Args:
@@ -307,7 +307,7 @@ def change_volume(volume: int, device: str = "MYPC") -> None:
     return
 
 
-def get_active_device() -> str:
+def get_active_device() -> str | None:
     """Will return the active devices
 
     Returns:
@@ -333,7 +333,7 @@ def set_active_device(device: str = "MYPC") -> None:
     return
 
 
-def get_currently_playing_track_json() -> json:
+def get_currently_playing_track_json() -> json | None:
     """Will return the currently playing track json
 
     Returns:
@@ -364,7 +364,7 @@ def get_name_and_cover_of_currently_playing_track() -> tuple[str, str]:
     return (json["item"]["name"], json["item"]["album"]["images"][0]["url"])
 
 
-def get_ids_for_recomendation() -> tuple[str, list]:
+def get_ids_for_recomendation() -> tuple[str, list[str]]:
     """Will return the tuple containing the ids recommended songs based on the currently playing
 
     Returns:
@@ -377,7 +377,7 @@ def get_ids_for_recomendation() -> tuple[str, list]:
     return (artists_id, [json["item"]["id"]])
 
 
-def get_uris_recomended_songs(num_of_songs: int = 20) -> list:
+def get_uris_recomended_songs(num_of_songs: int = 20) -> list[str]:
     """Will conver the tuple of recommended ids to uris
 
     Args:
