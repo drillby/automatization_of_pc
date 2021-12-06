@@ -1,4 +1,6 @@
 /tekore.cfg
 /testing.py
 /__pycache__
-/test.html
+/test
+/.vscode
+/modules/__pycache__

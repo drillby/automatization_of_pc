@@ -1,5 +1,7 @@
-import time
+import sys
+sys.path.append("C:/Users/Administrátor/OneDrive/Automatization of PC/modules")
 import spotify_api
+import time
 from flask import Flask, render_template, request, redirect
 
 app = Flask(__name__)

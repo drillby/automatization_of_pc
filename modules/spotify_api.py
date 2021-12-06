@@ -2,8 +2,10 @@ import json
 from json.decoder import JSONDecodeError
 import tekore as tk  # https://tekore.readthedocs.io/en/stable/reference/client.html#
 import requests
-from tekore._model import currently_playing
-from tekore._model.album.full import FullAlbum
+from tekore._model.artist import FullArtist
+from tekore._model.playlist import SimplePlaylist
+from tekore._model.track import FullTrack
+from tekore._model.album import SimpleAlbumPaging
 
 conf = tk.config_from_file("tekore.cfg", return_refresh=True)  # autorizace Spotify účtu
 user_token = tk.refresh_user_token(*conf[:2], conf[3])
@@ -18,7 +20,7 @@ API call is too slow for immediately showing device name on screen
 """
 
 
-def search_artist(param: str) -> json:
+def search_artist(param: str) -> FullArtist:
     """Will search for artist
 
     Args:
@@ -65,7 +67,7 @@ def play_artist(artist_name: str, device: str = "MYPC") -> None:
     return
 
 
-def search_album(param: str) -> json:
+def search_album(param: str) -> SimpleAlbumPaging:
     """Will search for an album
 
     Args:
@@ -158,7 +160,7 @@ def get_all_devices_name() -> list:
     return devices_name
 
 
-def search_track(param: str) -> json:
+def search_track(param: str) -> FullTrack:
     """Will search for track
 
     Args:
@@ -229,7 +231,7 @@ def add_song_to_queue(track_name: str, device: str = "MYPC") -> None:
     return
 
 
-def search_playlist(playlist_name: str) -> json:
+def search_playlist(playlist_name: str) -> SimplePlaylist:
     """Will search the playlist
 
     Args:
@@ -351,7 +353,7 @@ def get_currently_playing_track_json() -> json:
         return
 
 
-def get_name_and_cover_of_currently_playing_track() -> tuple:
+def get_name_and_cover_of_currently_playing_track() -> tuple[str, str]:
     """Will return the name and cover of the currently playing track
 
     Returns:
@@ -362,7 +364,7 @@ def get_name_and_cover_of_currently_playing_track() -> tuple:
     return (json["item"]["name"], json["item"]["album"]["images"][0]["url"])
 
 
-def get_ids_for_recomendation() -> tuple:
+def get_ids_for_recomendation() -> tuple[str, list]:
     """Will return the tuple containing the ids recommended songs based on the currently playing
 
     Returns:
