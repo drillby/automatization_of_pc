@@ -278,7 +278,7 @@ def play_playlist(playlist_name: str, device: str = "MYPC") -> None:
     return
 
 
-def get_device_volume(device_name: str = "MYPC") -> int | None:
+def get_device_volume(device_name: str = "MYPC") -> int:
     """Will return the current device volume
 
     Args:
@@ -307,7 +307,7 @@ def change_volume(volume: int, device: str = "MYPC") -> None:
     return
 
 
-def get_active_device() -> str | None:
+def get_active_device() -> str:
     """Will return the active devices
 
     Returns:
@@ -333,7 +333,7 @@ def set_active_device(device: str = "MYPC") -> None:
     return
 
 
-def get_currently_playing_track_json() -> json | None:
+def get_currently_playing_track_json() -> json:
     """Will return the currently playing track json
 
     Returns:
@@ -353,7 +353,7 @@ def get_currently_playing_track_json() -> json | None:
         return
 
 
-def get_name_and_cover_of_currently_playing_track() -> tuple[str, str]:
+def get_name_and_cover_of_currently_playing_track() -> tuple(str, str):
     """Will return the name and cover of the currently playing track
 
     Returns:
@@ -364,7 +364,7 @@ def get_name_and_cover_of_currently_playing_track() -> tuple[str, str]:
     return (json["item"]["name"], json["item"]["album"]["images"][0]["url"])
 
 
-def get_ids_for_recomendation() -> tuple[str, list[str]]:
+def get_ids_for_recomendation() -> tuple(str, list(str)):
     """Will return the tuple containing the ids recommended songs based on the currently playing
 
     Returns:
@@ -377,7 +377,7 @@ def get_ids_for_recomendation() -> tuple[str, list[str]]:
     return (artists_id, [json["item"]["id"]])
 
 
-def get_uris_recomended_songs(num_of_songs: int = 20) -> list[str]:
+def get_uris_recomended_songs(num_of_songs: int = 20) -> list(int):
     """Will conver the tuple of recommended ids to uris
 
     Args:
