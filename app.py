@@ -1,9 +1,7 @@
-import sys
-
-sys.path.insert(0, "/media/drillby/HDD/Automatization-of-PC/modules")
-import spotify_api
 import time
 from flask import Flask, render_template, request, redirect
+import modules.spotify_api as spotify_api
+
 
 app = Flask(__name__)
 
