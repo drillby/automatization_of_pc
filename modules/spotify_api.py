@@ -333,7 +333,7 @@ def set_active_device(device: str = "MYPC") -> None:
     return
 
 
-def get_currently_playing_track_json() -> json | None:
+def get_currently_playing_track_json() -> json:
     """Will return the currently playing track json
 
     Returns:
