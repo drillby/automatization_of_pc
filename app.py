@@ -1,5 +1,6 @@
 import sys
-sys.path.append("C:/Users/Administrátor/OneDrive/Automatization of PC/modules")
+
+sys.path.insert(0, "/media/drillby/HDD/Automatization-of-PC/modules")
 import spotify_api
 import time
 from flask import Flask, render_template, request, redirect
@@ -47,7 +48,7 @@ def home():
         active_device=active_device,
         playing_track=playing_track,
         cover_of_track=cover_of_track,
-        volume_percent = volume_percent
+        volume_percent=volume_percent,
     )
 
 
@@ -61,34 +62,33 @@ def result():
     text = text.split()
     text[0] = text[0].lower()
 
-    match text[0]:
-        case "s":
-            text.pop(0)
-            song = " ".join(map(str, text))
-            spotify_api.play_track(song, device)
+    if text[0] == "s":
+        text.pop(0)
+        song = " ".join(map(str, text))
+        spotify_api.play_track(song, device)
 
-        case "ar":
-            text.pop(0)
-            artist = " ".join(map(str, text))
-            spotify_api.play_artist(artist, device)
+    elif text[0] == "ar":
+        text.pop(0)
+        artist = " ".join(map(str, text))
+        spotify_api.play_artist(artist, device)
 
-        case"al":
-            text.pop(0)
-            album = " ".join(map(str, text))
-            spotify_api.play_album(album, device)
+    elif text[0] == "al":
+        text.pop(0)
+        album = " ".join(map(str, text))
+        spotify_api.play_album(album, device)
 
-        case "p":
-            text.pop(0)
-            playlist = " ".join(map(str, text))
-            spotify_api.play_playlist(playlist, device)
+    elif text[0] == "p":
+        text.pop(0)
+        playlist = " ".join(map(str, text))
+        spotify_api.play_playlist(playlist, device)
 
-        case "f" | "q":
-            text.pop(0)
-            song = " ".join(map(str, text))
-            spotify_api.add_song_to_queue(song, device)
+    elif text[0] == "f" or text[0] == "q":
+        text.pop(0)
+        song = " ".join(map(str, text))
+        spotify_api.add_song_to_queue(song, device)
 
-        case _:
-            pass # ignore unknown cases
+    else:
+        pass  # ignore unknown cases
 
     return redirect("http://192.168.132.102:8080")
 
@@ -99,7 +99,6 @@ def volume():
     volume = output["desired_volume"]
     device = output["device"]
 
-    
     if volume.isnumeric():
         spotify_api.change_volume(volume, device)
 
@@ -107,17 +106,17 @@ def volume():
 
     return redirect("http://192.168.132.102:8080")
 
+
 @app.route("/add_recomended_songs_to_queue", methods=["GET", "POST"])
 def add_to_queue():
     output = request.form.to_dict()
     device = output["device"]
     number = output["num_to_queue"]
-    
+
     if number.isnumeric():
         spotify_api.add_recomended_songs_to_queue(device, number)
-    
-    return redirect("http://192.168.132.102:8080")
 
+    return redirect("http://192.168.132.102:8080")
 
 
 if __name__ == "__main__":
