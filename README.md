@@ -4,9 +4,9 @@ Author: Pavel Podrazký
 This project contains some ideas how to automate my work on PC.
 
 ## Instalation and setup:
-I am using Python 3.10., so it is tested and debugged only for this version.
+I am using Python 3.10.1, so it is tested and debugged only for this version.
 
-This project is coded on Windows mashine, so some changes will be needed to make it work on other platforms.
+This project is coded on a Windows mashine, so some changes may be needed to make it work on other platforms.
 
 ### Server hosting:
 So far I am hosting a server on my PC using Flask library. Soon I will be hosting a server on RaspberryPi
@@ -17,18 +17,18 @@ So far I am hosting a server on my PC using Flask library. Soon I will be hostin
 * Some functions may require Spotify premium account
 
 ### Wake on LAN:
-* So far only an idea.
-* Will be using NFC tags.
-* Goal: Create a script that will turn on my PC when NFC tag is read.
+* You need to install wakeonlan package. See https://pypi.org/project/wakeonlan/
+* Also it is nessesary to enable WoL function in your BIOS and OS settings.
 
 ### Amazon Alexa:
 * So far only an idea.
-* Goal: Create script that will be able to control smart lights in the house.
+* Goal: Create script that will be able to control smart lights in the house using Alexa API.
 
 ## IDEAS:
 * Shell script that will take param and return google search results with given params
 * Create function for creating tekore.cfg
-* Add playing on more devices at once (currently not possible because of Spotify's API configuration)
+* Add playing on more devices at once (currently not possible because of Spotify's API)
+* Buy NFC tag to be able to start my PC just by reading it.
 
 ## ISSUES:
 * None
