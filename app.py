@@ -1,6 +1,7 @@
 import time
 from flask import Flask, render_template, request, redirect
 import modules.spotify_api as spotify_api
+import modules.wake_on_lan as wol
 
 
 app = Flask(__name__)
@@ -115,6 +116,14 @@ def add_to_queue():
         spotify_api.add_recomended_songs_to_queue(device, number)
 
     return redirect("http://192.168.132.102:8080")
+
+
+@app.route("/wol_Paja")
+def wol_Paja():
+    spotify_api.play_playlist("Hollywood Undead Mix", "Paja pokoj")
+    wol.wol("DC-41-A9-E2-FE-0F", "192.168.132.255")
+
+    return "Succes"
 
 
 if __name__ == "__main__":
