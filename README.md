@@ -9,11 +9,12 @@ I am using Python 3.10.1, so it is tested and debugged only for this version.
 This project is coded on a Windows mashine, so some changes may be needed to make it work on other platforms.
 
 ### Server hosting:
-So far I am hosting a server on my PC using Flask library. Soon I will be hosting a server on RaspberryPi
+So far I am hosting a server on my PC using Flask library. Soon I will be hosting a server on RaspberryPi or Synology NAS if possible
 
 ### Spotify:
 * You need to install the tekore package. See https://tekore.readthedocs.io/en/stable/
-* Also you need to set up tekore.cfg. See https://tekore.readthedocs.io/en/stable/getting_started.html
+* You need to set up tekore.cfg. See https://tekore.readthedocs.io/en/stable/getting_started.html
+* Also you need to set up developer account for Spotify. See https://developer.spotify.com
 * Some functions may require Spotify premium account
 
 ### Wake on LAN:
