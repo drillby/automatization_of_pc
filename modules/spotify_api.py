@@ -7,12 +7,13 @@ from tekore._model.track import FullTrack
 from tekore._model.album import SimpleAlbumPaging
 from json.decoder import JSONDecodeError
 
-# autorizace Spotify účtu
+# auth of Spotify account
 conf = tk.config_from_file("tekore.cfg", return_refresh=True)
 user_token = tk.refresh_user_token(*conf[:2], conf[3])
 
-spotify = tk.Spotify(conf)  # vytvoření Spotify objektu
-spotify.token = user_token  # přidělení uživatelského tokenu objektu spotify
+# give Spotify acces to API
+spotify = tk.Spotify(conf)
+spotify.token = user_token
 
 DEVICE_NAME = ""
 """
@@ -54,9 +55,6 @@ def play_artist(artist_name: str, device: str = "MYPC") -> None:
     """
     if len(artist_name) < 1:
         return ValueError("Name must be at least one character long")
-
-    if not get_active_device():
-        set_active_device()
 
     artist = search_artist(artist_name)
     artist_uri = tk.to_uri("artist", artist.id)
@@ -101,9 +99,6 @@ def play_album(album_name: str, device: str = "MYPC") -> None:
     """
     if len(album_name) < 1:
         return ValueError("Name must be at least one character long")
-
-    if not get_active_device():
-        set_active_device()
 
     album = search_album(album_name)
     album_uri = tk.to_uri("album", album.id)
@@ -153,12 +148,7 @@ def get_all_devices_name() -> list:
     Returns:
         list: List containing names of the devices
     """
-    devices_name = []
-    devices = get_devices()["devices"]
-    for device in devices:
-        devices_name.append(device["name"])
-
-    return devices_name
+    return [device["name"] for device in get_devices()["devices"]]
 
 
 def search_track(param: str) -> FullTrack:
@@ -194,9 +184,6 @@ def play_track(track_name: str, device: str = "MYPC") -> None:
     """
     if len(track_name) < 1:
         return ValueError("Name must be at least one character long")
-
-    if not get_active_device():
-        set_active_device()
 
     track = search_track(track_name)
     device_id = get_device_id(device)
@@ -266,10 +253,7 @@ def play_playlist(playlist_name: str, device: str = "MYPC") -> None:
         [None]: None
     """
     if len(playlist_name) < 1:
-        return ValueError("Name must be at least one character long")
-
-    if not get_active_device():
-        set_active_device()
+        raise ValueError("Name must be at least one character long")
 
     playlist = search_playlist(playlist_name)
     device_id = get_device_id(device)
@@ -322,25 +306,14 @@ def get_active_device() -> str:
     return
 
 
-def set_active_device(device: str = "MYPC") -> None:
-    """Will set the active device
-
-    Args:
-        device (str, optional): Name of the device you want to set to active. Defaults to "MYPC".
-    """
-    for device in get_devices()["devices"]:
-        if device["name"] == device:
-            device["is_active"] = True
-
-    return
-
-
 def get_currently_playing_track_json() -> json:
     """Will return the currently playing track json
 
     Returns:
         json: JSON containing the currently playing track information
     """
+    # this try/except is necessary when we boot up the server
+    # and we don't have a session on Spotify, Flask returns an error
     try:
         track_info = requests.get(
             "https://api.spotify.com/v1/me/player/currently-playing",
@@ -374,13 +347,17 @@ def get_ids_for_recomendation() -> tuple[str, list[str]]:
     """
     artists_id = []
     json = get_currently_playing_track_json()
-    for i in range(0, len(json["item"]["artists"])):
+    for i in range(len(json["item"]["artists"])):
         artists_id.append(json["item"]["artists"][i]["id"])
+
+    if len(artists_id) > 5:
+        artists_id = [artists_id[i] for i in range(4)]
+    # id of artists on track, id of the track
     return (artists_id, [json["item"]["id"]])
 
 
 def get_uris_recomended_songs(num_of_songs: int = 20) -> list[int]:
-    """Will conver the tuple of recommended ids to uris
+    """Will convert the tuple of recommended ids to uris
 
     Args:
         num_of_songs (int, optional): Number of songs you want to convert. Defaults to 20.
@@ -391,6 +368,7 @@ def get_uris_recomended_songs(num_of_songs: int = 20) -> list[int]:
     Returns:
         list: Contains the recommended uris
     """
+    # the 100 here is API limit
     if int(num_of_songs) > 100:
         raise ValueError("Number of recommended songs cant be more than 100")
 
@@ -399,7 +377,7 @@ def get_uris_recomended_songs(num_of_songs: int = 20) -> list[int]:
         artist_ids=artists_ids, track_ids=song_id, limit=num_of_songs
     ).tracks
 
-    return [t.uri for t in recom]
+    return [recom_song.uri for recom_song in recom]
 
 
 def add_recomended_songs_to_queue(device: str = "MYPC", num_of_songs: int = 20) -> None:
