@@ -11,8 +11,6 @@ active_device = spotify_api.get_active_device()
 if not active_device:
     active_device = "None"
 
-spotify_api.set_active_device()
-
 
 @app.route("/")
 @app.route("/home")
