@@ -29,7 +29,8 @@ So far I am hosting a server on my PC using Flask library. Soon I will be hostin
 * Shell script that will take param and return google search results with given params
 * Create function for creating tekore.cfg
 * Add playing on more devices at once (currently not possible because of Spotify's API)
-* Buy NFC tag to be able to start my PC just by reading it.
+* Buy NFC tag to be able to start face recognition script on RasoberryPi.
+* Set up face recognition and start my PC on match.
 
 ## ISSUES:
-* None
+* So far my only issue is that I am not coding on Linux. This will be fixed soon.
