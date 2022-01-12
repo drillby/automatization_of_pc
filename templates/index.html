@@ -4,26 +4,18 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" type="text/css" href="../static/style.css" />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="{{ url_for('static', filename='css/main.css') }}"
+    />
     <title>Spotify Automatization</title>
-
-    <style>
-      body {
-        text-align: center;
-      }
-      table {
-        margin: auto;
-      }
-      td {
-        width: 30%;
-      }
-    </style>
   </head>
   <body>
     <h2>
       Track {{playing_track}} momentálně hraje na zařízení {{active_device}}
     </h2>
-    <img src="{{cover_of_track}}" alt="" width="200" />
+    <img src="{{cover_of_track}}" alt="" width="200" /><br />
     <table>
       <tr>
         <td>
@@ -61,7 +53,7 @@
               id="desired_volume"
               name="desired_volume"
             />
-            <br /><br /><br /><br /><br /><br /><br />
+            <br /><br /><br /><br /><br /><br />
             <label for="device"><h2>Zařízení</h2></label>
             <select name="device" id="device" style="min-width: 150px">
               <option value="" selected="selected">-</option>
@@ -82,7 +74,7 @@
               max="100"
               id="num_to_queue"
               name="num_to_queue"
-            /><br /><br /><br /><br /><br /><br /><br /><br />
+            /><br /><br /><br /><br /><br /><br />
             <label for="device"><h2>Zařízení</h2></label>
             <select name="device" id="device" style="min-width: 150px">
               <option value="" selected="selected">-</option>
