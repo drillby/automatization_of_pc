@@ -30,10 +30,8 @@ def home():
     time.sleep(1)
 
     try:
-        (
-            playing_track,
-            cover_of_track,
-        ) = spotify_api.get_name_and_cover_of_currently_playing_track()
+        
+            playing_track, cover_of_track, = spotify_api.get_name_and_cover_of_currently_playing_track()
     except TypeError:
         playing_track = "None"
         cover_of_track = "https://upload.wikimedia.org/wikipedia/commons/thumb/1/19/Spotify_logo_without_text.svg/768px-Spotify_logo_without_text.svg.png"
@@ -122,6 +120,8 @@ def wol_Paja():
     wol.wol("DC-41-A9-E2-FE-0F", "192.168.132.255")
 
     return "Succes"
+
+
 
 
 if __name__ == "__main__":

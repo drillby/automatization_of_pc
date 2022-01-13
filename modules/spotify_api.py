@@ -31,6 +31,9 @@ def search_artist(param: str) -> FullArtist:
     Returns:
         json: JSON containing artist information
     """
+    if len(param) < 1:
+        raise ValueError("Name must be at least one character long")
+
     (artists,) = spotify.search(
         param,
         types=("artist",),
@@ -53,8 +56,6 @@ def play_artist(artist_name: str, device: str = "MYPC") -> None:
     Returns:
         [None]: None
     """
-    if len(artist_name) < 1:
-        return ValueError("Name must be at least one character long")
 
     artist = search_artist(artist_name)
     artist_uri = tk.to_uri("artist", artist.id)
@@ -75,6 +76,9 @@ def search_album(param: str) -> SimpleAlbumPaging:
     Returns:
         json: JSON containing information about the search result
     """
+    if len(param) < 1:
+        raise ValueError("Name must be at least one character long")
+
     (albums,) = spotify.search(
         param,
         types=("album",),
@@ -97,8 +101,6 @@ def play_album(album_name: str, device: str = "MYPC") -> None:
     Returns:
         None: None
     """
-    if len(album_name) < 1:
-        return ValueError("Name must be at least one character long")
 
     album = search_album(album_name)
     album_uri = tk.to_uri("album", album.id)
@@ -160,6 +162,9 @@ def search_track(param: str) -> FullTrack:
     Returns:
         json: JSON containing information about the track
     """
+    if len(param) < 1:
+        raise ValueError("Name must be at least one character long")
+
     (tracks,) = spotify.search(
         param,
         types=("track",),
@@ -182,13 +187,10 @@ def play_track(track_name: str, device: str = "MYPC") -> None:
     Returns:
         None: None
     """
-    if len(track_name) < 1:
-        return ValueError("Name must be at least one character long")
 
     track = search_track(track_name)
     device_id = get_device_id(device)
-    spotify.playback_start_tracks(
-        [track.id], device_id=device_id, position_ms=0)
+    spotify.playback_start_tracks([track.id], device_id=device_id, position_ms=0)
     return
 
 
@@ -229,6 +231,9 @@ def search_playlist(playlist_name: str) -> SimplePlaylist:
     Returns:
         json: JSON of the playlist
     """
+    if len(playlist_name) < 1:
+        raise ValueError("Name must be at least one character long")
+
     (playlist,) = spotify.search(
         playlist_name,
         types=("playlist",),
@@ -252,8 +257,6 @@ def play_playlist(playlist_name: str, device: str = "MYPC") -> None:
     Returns:
         [None]: None
     """
-    if len(playlist_name) < 1:
-        raise ValueError("Name must be at least one character long")
 
     playlist = search_playlist(playlist_name)
     device_id = get_device_id(device)
@@ -287,6 +290,9 @@ def change_volume(volume: int, device: str = "MYPC") -> None:
         volume (int): Defired volume of the device
         device (str, optional): Name of the device you want to change volume on. Defaults to "MYPC".
     """
+    if volume < 100 or volume > 0:
+        raise ValueError("Volume must be between 0 and 100")
+
     device_id = get_device_id(device)
     spotify.playback_volume(volume, device_id)
 
@@ -323,12 +329,14 @@ def get_currently_playing_track_json() -> json:
             },
         )
 
+    except json.decoder.JSONDecodeError:
+        print("JSON not found")
+
+    else:
         return track_info.json()
-    except JSONDecodeError:
-        return
 
 
-def get_name_and_cover_of_currently_playing_track() -> tuple(str, str):
+def get_name_and_cover_of_currently_playing_track() -> tuple:
     """Will return the name and cover of the currently playing track
 
     Returns:
@@ -339,7 +347,7 @@ def get_name_and_cover_of_currently_playing_track() -> tuple(str, str):
     return (json["item"]["name"], json["item"]["album"]["images"][0]["url"])
 
 
-def get_ids_for_recomendation() -> tuple(str, list(str)):
+def get_ids_for_recomendation() -> tuple:
     """Will return the tuple containing the ids recommended songs based on the currently playing
 
     Returns:
@@ -356,7 +364,7 @@ def get_ids_for_recomendation() -> tuple(str, list(str)):
     return (artists_id, [json["item"]["id"]])
 
 
-def get_uris_recomended_songs(num_of_songs: int = 20) -> list(int):
+def get_uris_recomended_songs(num_of_songs: int = 20) -> list:
     """Will convert the tuple of recommended ids to uris
 
     Args:
