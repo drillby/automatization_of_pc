@@ -4,3 +4,5 @@
 /test
 /.vscode
 /modules/__pycache__
+/modules/errors/__pycache__
+/modules/images/
