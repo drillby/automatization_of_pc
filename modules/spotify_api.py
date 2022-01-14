@@ -329,7 +329,7 @@ def get_currently_playing_track_json() -> json:
             },
         )
 
-    except json.decoder.JSONDecodeError:
+    except JSONDecodeError:
         print("JSON not found")
 
     else:

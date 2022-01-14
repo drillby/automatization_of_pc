@@ -2,6 +2,7 @@ import time
 from flask import Flask, render_template, request, redirect
 import modules.spotify_api as spotify_api
 import modules.wake_on_lan as wol
+from json.decoder import JSONDecodeError
 
 
 app = Flask(__name__)
@@ -32,7 +33,7 @@ def home():
     try:
         
             playing_track, cover_of_track, = spotify_api.get_name_and_cover_of_currently_playing_track()
-    except TypeError:
+    except JSONDecodeError:
         playing_track = "None"
         cover_of_track = "https://upload.wikimedia.org/wikipedia/commons/thumb/1/19/Spotify_logo_without_text.svg/768px-Spotify_logo_without_text.svg.png"
 
