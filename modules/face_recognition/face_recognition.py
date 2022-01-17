@@ -1,8 +1,7 @@
-# import face_recognition
 import os
 import numpy as np
 import cv2
-import errors.custom_errors as custome_err
+from errors import custom_errors as custom_errs
 
 
 def load_face_images() -> list:
@@ -37,7 +36,7 @@ def save_face_images() -> None:
 
     camera = cv2.VideoCapture(0)
     if not camera.isOpened():
-        raise custome_err.CameraError("Unable to open camera")
+        raise custom_errs.CameraError("Unable to open camera")
     name_of_img = get_num_of_images()
     directory = os.path.join(os.path.dirname(os.path.realpath(__file__)), "images")
 
@@ -45,7 +44,7 @@ def save_face_images() -> None:
         ret, frame = camera.read()
 
         if not ret:
-            raise custome_err.FrameError("Cannot recieve frame")
+            raise custom_errs.FrameError("Cannot recieve frame")
 
         cv2.imshow("Frame", frame)
 
@@ -63,4 +62,8 @@ def save_face_images() -> None:
     return
 
 
-save_face_images()
+desired_path = os.path.join(os.path.dirname(os.path.realpath(__file__)), "desired")
+old_path = os.path.join(os.path.dirname(os.path.realpath(__file__)), "lfw")
+for directory in os.listdir(old_path):
+    for file in os.listdir(os.path.join(old_path, directory)):
+        os.replace(old_path, desired_path)

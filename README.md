@@ -23,9 +23,8 @@ So far I am hosting a server on my PC using Flask library. Soon I will be hostin
 * Also it is nessesary to enable WoL function in your BIOS and OS settings.
 
 ### Face recognition:
-* You need to install opencv2 and face_recognition
+* You need to install opencv, numpy, tensorflow and matplotlib
 * Also you need a webcam.
-* 
 
 ### Amazon Alexa:
 * So far only an idea.
