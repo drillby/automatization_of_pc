@@ -1,7 +1,7 @@
 import time
 from flask import Flask, render_template, request, redirect
-import modules.spotify_api as spotify_api
-import modules.wake_on_lan as wol
+import modules.Spotify.spotify_api as spotify_api
+import modules.wake_on_lan.wake_on_lan as wol
 from json.decoder import JSONDecodeError
 
 

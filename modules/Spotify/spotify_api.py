@@ -330,10 +330,12 @@ def get_currently_playing_track_json() -> json:
         )
 
     except JSONDecodeError:
-        print("JSON not found")
+        return
 
-    else:
+    if track_info:
         return track_info.json()
+    else:
+        return
 
 
 def get_name_and_cover_of_currently_playing_track() -> tuple:
