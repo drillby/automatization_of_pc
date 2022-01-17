@@ -242,3 +242,23 @@ checkpoint = tf.train.Checkpoint(opt=opt, siamese_model=siamese_model)
 
 EPOCHS = 50
 train(train_data, EPOCHS)
+
+test_input, test_val, y_true = test_data.as_numpy_iterator().next()
+y_hat = siamese_model.predict([test_input, test_val])
+# Post processing the results
+prediction_results = [1 if prediction > 0.5 else 0 for prediction in y_hat]
+zeros = 0
+ones = 0
+for i in range(len(prediction_results)):
+    if prediction_results[i] == 1:
+        ones += 1
+    else:
+        zeros += 1
+
+print(f"Number of predictions: {ones+zeros}")
+print(f"Number of successful predictions: {ones}")
+print(f"Number of unsuccessful predictions: {zeros}")
+
+save = input("Save build?[y/n]: ")
+if save == "y":
+    siamese_model.save("siamesemodelv2.h5")
