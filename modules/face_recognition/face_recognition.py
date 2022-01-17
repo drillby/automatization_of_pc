@@ -8,6 +8,7 @@ from errors import custom_errors as custom_errs
 
 from tensorflow.keras.models import Model
 from tensorflow.keras.layers import Layer, Conv2D, Dense, MaxPooling2D, Input, Flatten
+from tensorflow.keras.metrics import Precision, Recall
 import tensorflow as tf
 
 
@@ -134,6 +135,7 @@ def make_siamese_model():
 def disable_gpu() -> None:
     """
     Will run TF on CPU.
+    Don't run this unless your GPU doesn't support CUDA
     """
     os.environ["CUDA_VISIBLE_DEVICES"] = "-1"
 
@@ -143,6 +145,49 @@ def disable_gpu() -> None:
         print("GPU disabled")
 
     return
+
+
+@tf.function
+def train_step(batch):
+
+    # Record all of our operations
+    with tf.GradientTape() as tape:
+        # Get anchor and positive/negative image
+        X = batch[:2]
+        # Get label
+        y = batch[2]
+
+        # Forward pass
+        yhat = siamese_model(X, training=True)
+        # Calculate loss
+        loss = binary_cross_loss(y, yhat)
+    print(loss)
+
+    # Calculate gradients
+    grad = tape.gradient(loss, siamese_model.trainable_variables)
+
+    # Calculate updated weights and apply to siamese model
+    opt.apply_gradients(zip(grad, siamese_model.trainable_variables))
+
+    # Return loss
+    return loss
+
+
+def train(data, EPOCHS):
+    # Loop through epochs
+    for epoch in range(1, EPOCHS + 1):
+        print(f"\n Epoch {epoch}/{EPOCHS}")
+        progbar = tf.keras.utils.Progbar(len(data))
+
+        # Loop through each batch
+        for idx, batch in enumerate(data):
+            # Run train step here
+            train_step(batch)
+            progbar.update(idx + 1)
+
+        # Save checkpoints
+        if epoch % 10 == 0:
+            checkpoint.save(file_prefix=checkpoint_prefix)
 
 
 disable_gpu()
@@ -187,3 +232,13 @@ test_data = test_data.batch(16)
 embedding = make_embedding()
 
 siamese_model = make_siamese_model()
+
+binary_cross_loss = tf.losses.BinaryCrossentropy()
+opt = tf.keras.optimizers.Adam(1e-4)
+
+checkpoint_dir = "./training_checkpoints"
+checkpoint_prefix = os.path.join(checkpoint_dir, "ckpt")
+checkpoint = tf.train.Checkpoint(opt=opt, siamese_model=siamese_model)
+
+EPOCHS = 50
+train(train_data, EPOCHS)
