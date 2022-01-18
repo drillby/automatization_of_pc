@@ -8,3 +8,4 @@
 /modules/face_recognition/data/negative/
 /modules/face_recognition/data/positive/
 /modules/face_recognition/data/anchor/
+/modules/face_recognition/training_checkpoints/

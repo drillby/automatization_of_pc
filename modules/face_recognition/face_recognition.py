@@ -1,15 +1,17 @@
-from webbrowser import get
-import cv2
-import numpy as np
 import os
 import random
-from matplotlib import pyplot as plt
-from errors import custom_errors as custom_errs
+from webbrowser import get
 
-from tensorflow.keras.models import Model
-from tensorflow.keras.layers import Layer, Conv2D, Dense, MaxPooling2D, Input, Flatten
-from tensorflow.keras.metrics import Precision, Recall
+import cv2
+import numpy as np
 import tensorflow as tf
+from matplotlib import pyplot as plt
+from tensorflow.keras.layers import (Conv2D, Dense, Flatten, Input, Layer,
+                                     MaxPooling2D)
+from tensorflow.keras.metrics import Precision, Recall
+from tensorflow.keras.models import Model
+
+from errors import custom_errors as custom_errs
 
 
 class L1Dist(Layer):
@@ -243,22 +245,28 @@ checkpoint = tf.train.Checkpoint(opt=opt, siamese_model=siamese_model)
 EPOCHS = 50
 train(train_data, EPOCHS)
 
-test_input, test_val, y_true = test_data.as_numpy_iterator().next()
-y_hat = siamese_model.predict([test_input, test_val])
-# Post processing the results
-prediction_results = [1 if prediction > 0.5 else 0 for prediction in y_hat]
-zeros = 0
-ones = 0
-for i in range(len(prediction_results)):
-    if prediction_results[i] == 1:
-        ones += 1
-    else:
-        zeros += 1
 
-print(f"Number of predictions: {ones+zeros}")
-print(f"Number of successful predictions: {ones}")
-print(f"Number of unsuccessful predictions: {zeros}")
+# test_input, test_val, y_true = test_data.as_numpy_iterator().next()
+for test_input, test_val, y_true in test_data:
+    y_hat = siamese_model.predict([test_input, test_val])
+    # Post processing the results
+    prediction_results = [1 if prediction > 0.5 else 0 for prediction in y_hat]
+    print(prediction_results)
+
+    zeros = 0
+    ones = 0
+    for i in range(len(prediction_results)):
+        if prediction_results[i] == 1:
+            ones += 1
+        else:
+            zeros += 1
+
+    print(f"Number of predictions: {ones+zeros}")
+    print(f"Number of successful predictions: {ones}")
+    print(f"Number of unsuccessful predictions: {zeros}")
 
 save = input("Save build?[y/n]: ")
 if save == "y":
     siamese_model.save("siamesemodelv2.h5")
+else:
+    exit()
