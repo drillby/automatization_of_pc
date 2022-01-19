@@ -40,6 +40,7 @@ So far I am hosting a server on my PC using Flask library. Soon I will be hostin
 * Add playing on more devices at once (currently not possible because of Spotify's API)
 * Buy NFC tag to be able to start face recognition/detection script on RaspberryPi.
 * Set up face recognition and start my PC on match.
+* Refactor spotify_api into classes
 
 ## ISSUES:
 * Don't know how to figure out face recognition.
