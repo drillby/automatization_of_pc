@@ -6,8 +6,7 @@ import cv2
 import numpy as np
 import tensorflow as tf
 from matplotlib import pyplot as plt
-from tensorflow.keras.layers import (Conv2D, Dense, Flatten, Input, Layer,
-                                     MaxPooling2D)
+from tensorflow.keras.layers import Conv2D, Dense, Flatten, Input, Layer, MaxPooling2D
 from tensorflow.keras.metrics import Precision, Recall
 from tensorflow.keras.models import Model
 
@@ -242,7 +241,7 @@ checkpoint_dir = "./training_checkpoints"
 checkpoint_prefix = os.path.join(checkpoint_dir, "ckpt")
 checkpoint = tf.train.Checkpoint(opt=opt, siamese_model=siamese_model)
 
-EPOCHS = 50
+EPOCHS = 70
 train(train_data, EPOCHS)
 
 
@@ -262,8 +261,8 @@ for test_input, test_val, y_true in test_data:
             zeros += 1
 
     print(f"Number of predictions: {ones+zeros}")
-    print(f"Number of successful predictions: {ones}")
-    print(f"Number of unsuccessful predictions: {zeros}")
+    print(f"Number of matching predictions: {ones}")
+    print(f"Number of not matching predictions: {zeros}")
 
 save = input("Save build?[y/n]: ")
 if save == "y":
