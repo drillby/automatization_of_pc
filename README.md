@@ -20,7 +20,7 @@ So far I am hosting a server on my PC using Flask library. Soon I will be hostin
 * You need to install wakeonlan package. See https://pypi.org/project/wakeonlan/
 * Also it is nessesary to enable WoL function in your BIOS and OS settings.
 
-### Face recognition:
+### Face recognition/detection:
 * You need to install opencv, numpy and tensorflow.
 * Also you need a webcam.
 * You need to provide your photos.
@@ -30,12 +30,16 @@ So far I am hosting a server on my PC using Flask library. Soon I will be hostin
 * So far only an idea.
 * Goal: Create script that will be able to control smart lights in the house using Alexa API.
 
+### Calendar + Reminders:
+* So far only an idea.
+* Somehow get data from Google Calendar and Apple Reminders.
+* Display it to the website.
+* Be able to somewhat control Reminders - close them.
+
 ## IDEAS:
-* Shell script that will take param and return google search results with given params
-* Create function for creating tekore.cfg
 * Add playing on more devices at once (currently not possible because of Spotify's API)
-* Buy NFC tag to be able to start face recognition script on RaspberryPi.
+* Buy NFC tag to be able to start face recognition/detection script on RaspberryPi.
 * Set up face recognition and start my PC on match.
 
 ## ISSUES:
-* So far my only issue is that I am not coding on Linux. This will be fixed soon.
+* Don't know how to figure out face recognition.

@@ -4,4 +4,5 @@
 /test
 /.vscode
 /modules/__pycache__
-/modules/errors/__pycache__
+/modules/Spotify/__pycache__
+/modules/wake_on_lan/__pycache__
