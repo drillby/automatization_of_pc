@@ -5,8 +5,3 @@
 /.vscode
 /modules/__pycache__
 /modules/errors/__pycache__
-/modules/face_recognition/data/negative/*
-/modules/face_recognition/data/positive/*
-/modules/face_recognition/data/anchor/*
-/modules/face_recognition/training_checkpoints/*
-/modules/face_recognition/errors/__pycache__/
