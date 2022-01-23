@@ -1,14 +1,8 @@
 import json
 import requests
-import tekore as tk  # https://tekore.readthedocs.io/en/stable/reference/client.html#
+from modules.Spotify.Spotify_auth import Spotify_Auth
 
-# auth of Spotify account
-conf = tk.config_from_file("tekore.cfg", return_refresh=True)
-user_token = tk.refresh_user_token(*conf[:2], conf[3])
-
-# give Spotify acces to API
-spotify = tk.Spotify(conf)
-spotify.token = user_token
+spotify_token, spotify = Spotify_Auth()
 
 
 class Device:
@@ -26,7 +20,7 @@ class Device:
             "https://api.spotify.com/v1/me/player/devices",
             headers={
                 "Content-Type": "application/json",
-                "Authorization": f"Bearer {user_token}",
+                "Authorization": f"Bearer {spotify_token}",
             },
         )
 
