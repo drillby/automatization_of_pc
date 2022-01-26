@@ -1,6 +1,6 @@
 import json
 import requests
-from modules.Spotify.Spotify_auth import Spotify_Auth
+from .Spotify_auth import Spotify_Auth
 
 spotify_token, spotify = Spotify_Auth()
 

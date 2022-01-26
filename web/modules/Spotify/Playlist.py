@@ -1,6 +1,6 @@
 from tekore._model.playlist import SimplePlaylist
-from modules.Spotify.Device import Device
-from modules.Spotify.Spotify_auth import Spotify_Auth
+from .Device import Device
+from .Spotify_auth import Spotify_Auth
 
 
 spotify_token, spotify = Spotify_Auth()
