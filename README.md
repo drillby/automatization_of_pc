@@ -9,7 +9,7 @@ I am using Python 3.10.1, 3.8.10 and 3.9.9, so it is tested and debugged only fo
 This project is coded on both Windows and Linux.
 
 ### Server hosting:
-So far I am hosting a server on my PC using Flask library. Soon I will be hosting a server on RaspberryPi or Synology NAS if possible
+So far I am hosting a server on my PC using Django library. Soon I will be hosting a server on RaspberryPi or Synology NAS if possible
 
 ### Spotify:
 * You need to install the tekore package. See https://tekore.readthedocs.io/en/stable/
@@ -35,6 +35,10 @@ So far I am hosting a server on my PC using Flask library. Soon I will be hostin
 * Somehow get data from Google Calendar and Apple Reminders.
 * Display it to the website.
 * Be able to somewhat control Reminders - close them.
+
+### Voice assistent:
+* Small voice assistent that will bring together all of the functions in this project. Can be used instead of the web interface.
+* Some users may run into issues with installing PyAudio library. If this happens to you, please visit this <a href='https://www.lfd.uci.edu/~gohlke/pythonlibs/#pyaudio'>site</a> and download version coresponding with your Python instalations
 
 ## IDEAS:
 * Add playing on more devices at once (currently not possible because of Spotify's API)

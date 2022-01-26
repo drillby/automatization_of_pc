@@ -1,10 +1,7 @@
+from json import JSONDecodeError
 import time
-from flask import Flask, render_template, request, redirect
+from django.shortcuts import redirect, render
 import modules
-from json.decoder import JSONDecodeError
-
-
-app = Flask(__name__)
 
 artist_obj = modules.Artist()
 album_obj = modules.Album()
@@ -17,10 +14,8 @@ current_track_obj = modules.CurrentTrack()
 devices_name = device_obj.get_all_names()
 active_device = active_device_obj.update_active_device("None")
 
-
-@app.route("/")
-@app.route("/home")
-def home():
+# Create your views here.
+def index(request):
     active_device = active_device_obj.get_active_device()
 
     if active_device != "None":
@@ -40,22 +35,21 @@ def home():
         playing_track = "None"
         cover_of_track = "https://upload.wikimedia.org/wikipedia/commons/thumb/1/19/Spotify_logo_without_text.svg/768px-Spotify_logo_without_text.svg.png"
 
-    return render_template(
-        "index.html",
-        num_of_devices=len(devices_name),
-        devices_name=devices_name,
-        active_device=active_device,
-        playing_track=playing_track,
-        cover_of_track=cover_of_track,
-        volume_percent=volume_percent,
-    )
+    content = {
+        "num_of_devices": len(devices_name),
+        "devices_name": devices_name,
+        "active_device": active_device,
+        "playing_track": playing_track,
+        "cover_of_track": cover_of_track,
+        "volume_percent": volume_percent,
+    }
+    return render(request, "Spotify/index.html", context=content)
 
 
-@app.route("/run_spotify", methods=["GET", "POST"])
-def result():
-    output = request.form.to_dict()
-    text = output["name"]
-    device = output["device"]
+def run_spotify(request):
+    device = request.GET["device"]
+    text = request.GET["name"]
+
     if device == "":
         device = active_device_obj.get_active_device()
     else:
@@ -89,45 +83,25 @@ def result():
         song = " ".join(map(str, text))
         track_obj.add_to_queue(song, device)
 
-    return redirect("http://192.168.132.102:8080")
+    return redirect("http://127.0.0.1:8000/spotify/")
 
 
-@app.route("/change_volume", methods=["GET", "POST"])
-def volume():
-    output = request.form.to_dict()
-    volume = output["desired_volume"]
+def volume(request):
+    volume = request.GET["desired_volume"]
 
     if volume.isnumeric():
         active_device_obj.change_volume(volume)
 
     time.sleep(1)
 
-    return redirect("http://192.168.132.102:8080")
+    return redirect("http://127.0.0.1:8000/spotify/")
 
 
-@app.route("/add_recomended_songs_to_queue", methods=["GET", "POST"])
-def add_to_queue():
-    output = request.form.to_dict()
-    number = output["num_to_queue"]
-    device = output["device"]
-    if device == "":
-        device = active_device_obj.get_active_device()
-    else:
-        active_device_obj.update_active_device(device)
+def add_to_queue(request):
+    number = request.GET["num_to_queue"]
+    device = request.GET["device"]
 
     if number.isnumeric():
         current_track_obj.add_recomended_to_queue(device, number)
 
     return redirect("http://192.168.132.102:8080")
-
-
-@app.route("/wol_Paja")
-def wol_Paja():
-    playlist_obj.play("Hollywood Undead Mix", "Paja pokoj")
-    modules.wol.wol("DC-41-A9-E2-FE-0F", "192.168.132.255")
-
-    return "Succes"
-
-
-if __name__ == "__main__":
-    app.run(host="192.168.132.102", port=8080, debug=True)

@@ -3,7 +3,9 @@
 /__pycache__
 /test
 /.vscode
-/modules/__pycache__
-/modules/Spotify/__pycache__
-/modules/wake_on_lan/__pycache__
+web/modules/__pycache__
+web/modules/Spotify/__pycache__
+web/modules/wake_on_lan/__pycache__
 venv
+web/Spotify/__pycache__
+web/modules/voice_assistent/voice.mp3
