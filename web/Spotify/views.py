@@ -2,7 +2,6 @@ from json import JSONDecodeError
 import time
 from django.shortcuts import redirect, render
 import modules
-from . import urls
 
 artist_obj = modules.Artist()
 album_obj = modules.Album()
