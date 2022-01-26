@@ -9,3 +9,4 @@ web/modules/wake_on_lan/__pycache__
 venv
 web/Spotify/__pycache__
 web/modules/voice_assistent/voice.mp3
+web/web/__pycache__

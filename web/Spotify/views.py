@@ -2,6 +2,7 @@ from json import JSONDecodeError
 import time
 from django.shortcuts import redirect, render
 import modules
+from . import urls
 
 artist_obj = modules.Artist()
 album_obj = modules.Album()
@@ -83,7 +84,8 @@ def run_spotify(request):
         song = " ".join(map(str, text))
         track_obj.add_to_queue(song, device)
 
-    return redirect("http://127.0.0.1:8000/spotify/")
+    return redirect("index")
+    # return redirect("ulr {{urls/index}}")
 
 
 def volume(request):
@@ -94,7 +96,7 @@ def volume(request):
 
     time.sleep(1)
 
-    return redirect("http://127.0.0.1:8000/spotify/")
+    return redirect("index")
 
 
 def add_to_queue(request):
@@ -104,4 +106,4 @@ def add_to_queue(request):
     if number.isnumeric():
         current_track_obj.add_recomended_to_queue(device, number)
 
-    return redirect("http://192.168.132.102:8080")
+    return redirect("index")
