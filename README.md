@@ -9,7 +9,8 @@ I am using Python 3.10.1, 3.8.10 and 3.9.9, so it is tested and debugged only fo
 This project is coded on both Windows and Linux.
 
 ### Server hosting:
-So far I am hosting a server on my PC using Django library. Soon I will be hosting a server on RaspberryPi or Synology NAS if possible
+So far I am hosting a server on my PC using Django library. Soon I will be hosting a server on RaspberryPi or Synology NAS if possible.
+To change Django to your local network go into web/web/setting.py and change content of ALLOWED_HOSTS 
 
 ### Spotify:
 * You need to install the tekore package. See https://tekore.readthedocs.io/en/stable/
