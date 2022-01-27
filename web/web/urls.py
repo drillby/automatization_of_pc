@@ -19,4 +19,6 @@ from django.urls import path, include
 urlpatterns = [
     path("admin/", admin.site.urls),
     path("spotify/", include("Spotify.urls")),
+    path("calendar/", include("cal_reminders.urls")),
+
 ]
