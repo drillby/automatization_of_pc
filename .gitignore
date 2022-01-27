@@ -10,4 +10,4 @@ env
 web/Spotify/__pycache__
 web/modules/voice_assistent/voice.mp3
 web/web/__pycache__
-web/tekore.cfg
+web/modules/Spotify/tekore.cfg
