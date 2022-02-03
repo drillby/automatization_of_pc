@@ -8,7 +8,7 @@ I am using Python 3.10.1, 3.8.10 and 3.9.9, so it is tested and debugged only fo
 To install all the nessesary packages run <br> 
 `pip install -r requirements.txt`
 
-This project is desingned not to be dependent on OS.
+Recomended OS is any Unix based system, Windows machines will experience not working face_recognition.
 
 ### Server hosting:
 So far I am hosting a server on my PC using Django library. Soon I will be hosting a server on RaspberryPi or Synology NAS if possible.
@@ -23,10 +23,10 @@ To change Django to your local network go into web/web/setting.py and change con
 * Also it is nessesary to enable WoL function in your BIOS and OS settings.
 
 ### Face recognition/detection:
-* So far only an idea.
-* Also you need a webcam.
-* You need to provide your photos.
-* TF is currently not supported on Python 3.10+, so make sure you have lover version.
+* Only usable on Linux machines.
+* You need to update turn_on_pc/wol_adresses.json based on your mac address and broadcast IP.
+* Also you need to provide your pictures to the turn_on_pc/images folder.
+* Run by running the main.py file
 
 ### Amazon Alexa:
 * So far only an idea.
