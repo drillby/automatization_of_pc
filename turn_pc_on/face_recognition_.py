@@ -107,9 +107,6 @@ def recognize():
         if common_data(face_names, known_face_names):
             return True
 
-            # Display the resulting image
-        #cv2.imshow('Video', frame)
-
         # Hit 'q' on the keyboard to quit!
         if cv2.waitKey(1) & 0xFF == ord('q'):
             break
