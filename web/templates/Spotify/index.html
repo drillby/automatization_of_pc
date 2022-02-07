@@ -37,9 +37,10 @@
   </style>
   <body>
     <h2>
-      Track {{playing_track}} momentálně hraje na zařízení {{active_device}}
+      Track <b id="currently_playing">None</b> momentálně hraje na zařízení
+      {{active_device}}
     </h2>
-    <img src="{{cover_of_track}}" alt="" width="200" /><br />
+    <img src="{{cover_of_track}}" alt="" width="200" id="cover" /><br />
     <table>
       <tr>
         <td>
@@ -118,5 +119,29 @@
         </td>
       </tr>
     </table>
+    <script>
+      function startLiveUpdate() {
+        const textTrackName = document.getElementById("currently_playing");
+        const trackCover = document.getElementById("cover");
+
+        setInterval(function () {
+          fetch("live_update")
+            .then(function (response) {
+              return response.json();
+            })
+            .then(function (data) {
+              textTrackName.textContent = data.name;
+              trackCover.src = data.cover;
+            })
+            .catch(function (error) {
+              console.log(error);
+            });
+        }, 5000);
+      }
+
+      document.addEventListener("DOMContentLoaded", function () {
+        startLiveUpdate();
+      });
+    </script>
   </body>
 </html>

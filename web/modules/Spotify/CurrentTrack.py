@@ -76,7 +76,8 @@ class CurrentTrack:
         """
         # the 100 here is API limit
         if int(num_of_songs) > 100:
-            raise ValueError("Number of recommended songs cant be more than 100")
+            raise ValueError(
+                "Number of recommended songs cant be more than 100")
 
         artists_ids, song_id = self.get_ids_for_recomendation()
         recom = spotify.recommendations(

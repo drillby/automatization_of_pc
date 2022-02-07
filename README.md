@@ -4,11 +4,11 @@ Author: Pavel Podrazký
 This project contains some ideas how to automate my work on PC.
 
 ## Instalation and setup:
-I am using Python 3.10.1, 3.8.10 and 3.9.9, so it is tested and debugged only for this version.
+I am using Python 3.10.1, 3.8.10 and 3.9.9, so it is tested and debugged only for theese versions.
 To install all the nessesary packages run <br> 
 `pip install -r requirements.txt`
 
-This project is desingned not to be dependent on OS.
+Recomended OS is any Unix based system, Windows machines will experience not working face_recognition and there may be truble with PyAudio.
 
 ### Server hosting:
 So far I am hosting a server on my PC using Django library. Soon I will be hosting a server on RaspberryPi or Synology NAS if possible.
@@ -22,13 +22,14 @@ To change Django to your local network go into web/web/setting.py and change con
 * Some functions may require Spotify premium account
 * All of the functions are described in the web/modules/Spotify folder in each file
 ### Wake on LAN:
-* Also it is nessesary to enable WoL function in your BIOS and OS settings.
+* It is nessesary to enable WoL function in your BIOS and OS settings.
+* File is in the turn_on_pc folder.
 
-### Face recognition/detection:
-* So far only an idea.
-* Also you need a webcam.
-* You need to provide your photos.
-* TF is currently not supported on Python 3.10+, so make sure you have lover version.
+### Face recognition:
+* Only usable on Linux machines.
+* You need to update turn_on_pc/wol_adresses.json based on your mac address and broadcast IP.
+* Also you need to provide your pictures to the turn_on_pc/images folder.
+* Run by running the main.py file in turn_pc_on folder.
 
 ### Amazon Alexa:
 * So far only an idea.
@@ -41,7 +42,7 @@ To change Django to your local network go into web/web/setting.py and change con
 
 ### Voice assistent:
 * Small voice assistent that will bring together all of the functions in this project. Can be used instead of the web interface.
-* Some users may run into issues with installing PyAudio library. If this happens to you, please visit this <a href='https://www.lfd.uci.edu/~gohlke/pythonlibs/#pyaudio'>site</a> and download version coresponding with your Python instalations
+* Some Windows users may run into issues with installing PyAudio library. If this happens to you, please visit this <a href='https://www.lfd.uci.edu/~gohlke/pythonlibs/#pyaudio'>site</a> and download version coresponding with your Python instalations
 
 ## IDEAS:
 * Add playing on more devices at once (currently not possible because of Spotify's API)

@@ -1,6 +1,7 @@
 from json import JSONDecodeError
 import time
 from django.shortcuts import redirect, render
+from django.http import JsonResponse
 import modules.Spotify.Artist
 import modules.Spotify.Album
 import modules.Spotify.Playlist
@@ -21,6 +22,8 @@ devices_name = device_obj.get_all_names()
 active_device = active_device_obj.update_active_device("None")
 
 # Create your views here.
+
+
 def index(request):
     active_device = active_device_obj.get_active_device()
 
@@ -112,3 +115,8 @@ def add_to_queue(request):
         current_track_obj.add_recomended_to_queue(device, number)
 
     return redirect("/spotify/index")
+
+
+def live_update(request):
+    name, img = current_track_obj.get_name_and_cover()
+    return JsonResponse(data={'name': name, 'cover': img}, safe=False)

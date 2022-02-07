@@ -9,4 +9,5 @@ urlpatterns = [
     path(
         "add_recomended_songs_to_queue", views.add_to_queue, name="add_songs_to_queue"
     ),
+    path("live_update", views.live_update, name="live_update"),
 ]

@@ -13,3 +13,5 @@ web/modules/Spotify/tekore.cfg
 tekore.cfg
 web/calendar_reminders/__pycache__
 web/calendar_reminders/migrations/__pycache__
+turn_pc_on/__pycache__
+turn_pc_on/images/*
