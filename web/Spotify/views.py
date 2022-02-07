@@ -4,19 +4,18 @@ from django.shortcuts import redirect, render
 import modules.Spotify.Artist
 import modules.Spotify.Album
 import modules.Spotify.Playlist
+import modules.Spotify.Track
 import modules.Spotify.Device
 import modules.Spotify.ActiveDevice
-import modules.Spotify.Track
 import modules.Spotify.CurrentTrack
 
-
-artist_obj = modules.Artist()
-album_obj = modules.Album()
-playlist_obj = modules.Playlist()
-device_obj = modules.Device()
-active_device_obj = modules.ActiveDevice()
-track_obj = modules.Track()
-current_track_obj = modules.CurrentTrack()
+artist_obj = modules.Spotify.Artist.Artist()
+album_obj = modules.Spotify.Album.Album()
+playlist_obj = modules.Spotify.Playlist.Playlist()
+device_obj = modules.Spotify.Device.Device()
+active_device_obj = modules.Spotify.ActiveDevice.ActiveDevice()
+track_obj = modules.Spotify.Track.Track()
+current_track_obj = modules.Spotify.CurrentTrack.CurrentTrack()
 
 devices_name = device_obj.get_all_names()
 active_device = active_device_obj.update_active_device("None")

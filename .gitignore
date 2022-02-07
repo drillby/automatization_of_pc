@@ -11,5 +11,5 @@ modules/voice_assistent/voice.mp3
 web/web/__pycache__
 web/modules/Spotify/tekore.cfg
 tekore.cfg
-web/cal_reminders/__pycache__
-web/cal_reminders/migrations/__pycache__
+web/calendar_reminders/__pycache__
+web/calendar_reminders/migrations/__pycache__

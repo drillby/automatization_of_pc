@@ -15,10 +15,12 @@ So far I am hosting a server on my PC using Django library. Soon I will be hosti
 To change Django to your local network go into web/web/setting.py and change content of ALLOWED_HOSTS 
 
 ### Spotify:
-* You need to set up tekore.cfg. See https://tekore.readthedocs.io/en/stable/getting_started.html, and put it in the web/web folder. For that use `Spotify_auth.create_credentials()`
+* You need to set up tekore.cfg. See https://tekore.readthedocs.io/en/stable/getting_started.html, and put it in the web/web folder. For that use <br>
+`from modules.Spotify.Spotify_auth import create_credentials` <br>
+`create_credentials()`
 * Also you need to set up developer account for Spotify. See https://developer.spotify.com
 * Some functions may require Spotify premium account
-* All of the functions are described in the web/modules/Spotify folder
+* All of the functions are described in the web/modules/Spotify folder in each file
 ### Wake on LAN:
 * Also it is nessesary to enable WoL function in your BIOS and OS settings.
 
@@ -35,6 +37,7 @@ To change Django to your local network go into web/web/setting.py and change con
 ### Calendar + Reminders:
 * Only working on Apple services.
 * All of your events and reminders must be backed up on iCloud.
+* pyicloud may raise this error: Authentication required for Account. (421) <br> fix <a href="Authentication required for Account. (421)">here</a>
 
 ### Voice assistent:
 * Small voice assistent that will bring together all of the functions in this project. Can be used instead of the web interface.
