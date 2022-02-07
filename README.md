@@ -16,20 +16,16 @@ To change Django to your local network go into web/web/setting.py and change con
 
 ### Spotify:
 * You need to set up tekore.cfg. See https://tekore.readthedocs.io/en/stable/getting_started.html, and put it in the web/web folder. For that use <br>
-`from modules.Spotify.Spotify_auth import create_credentials` <br>
-`create_credentials()`
+```python
+from modules.Spotify.Spotify_auth import create_credentials
+
+create_credentials()
+```
 * Also you need to set up developer account for Spotify. See https://developer.spotify.com
 * Some functions may require Spotify premium account
 * All of the functions are described in the web/modules/Spotify folder in each file
-### Wake on LAN:
-* It is nessesary to enable WoL function in your BIOS and OS settings.
-* File is in the turn_on_pc folder.
-
-### Face recognition:
-* Only usable on Linux machines.
-* You need to update turn_on_pc/wol_adresses.json based on your mac address and broadcast IP.
-* Also you need to provide your pictures to the turn_on_pc/images folder.
-* Run by running the main.py file in turn_pc_on folder.
+### Wake on LAN and face recognition:
+* You can find this README in turn_on_pc folder.
 
 ### Amazon Alexa:
 * So far only an idea.

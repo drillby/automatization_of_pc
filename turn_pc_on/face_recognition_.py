@@ -1,3 +1,5 @@
+import json
+from typing import Tuple
 import face_recognition
 import cv2
 import numpy as np
@@ -33,29 +35,42 @@ def common_data(list1: list, list2: list) -> bool:
         return False
 
 
-MAC = "fc:aa:14:03:e6:37"
-BRODCAST_IP = "192.168.132.255"
+def encode_faces() -> Tuple[list, list]:
+    """Will encode imgs for face recognition
+
+    Raises:
+        ValueError: Raised when keys "name" and "path" are not the same length
+
+    Returns:
+        Tuple[list, list]: tuple of lists. list 1 - encoded faces, list 2 - names corresponding to faces
+    """
+    with open("faces.json") as file:
+        faces = json.load(file)
+
+    if len(faces["path"]) != len(faces["name"]):
+        raise ValueError("Arrays must have the same length")
+
+    known_face_encodings = []
+    known_face_names = []
+
+    for index, path in enumerate(faces["path"]):
+        img = face_recognition.load_image_file(path)
+        encoding = face_recognition.face_encodings(img)[0]
+        known_face_encodings.append(encoding)
+        known_face_names.append(faces["name"][index])
+
+    return known_face_encodings, known_face_names
 
 
-def recognize():
+def recognize() -> bool:
+    """Responsible for face recognition
+
+    Returns:
+        bool: True=face recognised
+    """
+    known_face_encodings, known_face_names = encode_faces()
+
     video_capture = cv2.VideoCapture(0)
-
-    # Load a sample picture and learn how to recognize it.
-    face_1 = face_recognition.load_image_file("images/face_1.jpg")
-    face_2 = face_recognition.load_image_file("images/face_2.jpg")
-    face_3 = face_recognition.load_image_file("images/face_3.jpg")
-
-    face_encoding_1 = face_recognition.face_encodings(face_1)[0]
-    face_encoding_2 = face_recognition.face_encodings(face_2)[0]
-    face_encoding_3 = face_recognition.face_encodings(face_3)[0]
-
-    # Create arrays of known face encodings and their names
-    known_face_encodings = [face_encoding_1, face_encoding_2, face_encoding_3]
-    known_face_names = [
-        "Pavel Podrazky",
-        "Pavel Podrazky",
-        "Pavel Podrazky"
-    ]
 
     # Initialize some variables
     face_locations = []
