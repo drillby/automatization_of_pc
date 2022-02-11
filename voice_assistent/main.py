@@ -29,6 +29,7 @@ def get_audio():
         except Exception:
             return f"Exception: {str(Exception)}"
 
+
 def note(text):
     date = datetime.datetime.now()
     file_name = str(date).replace(":", "-") + "-note.txt"
@@ -37,4 +38,11 @@ def note(text):
 
     subprocess.Popen(["notepad.exe", file_name])
 
-WAKE = 'hey paul'
+
+WAKE = 'wake up'
+
+while True:
+    text = get_audio()
+    if text.count(WAKE) > 0:
+        speak("Jsem připraven")
+        #text = get_audio()
