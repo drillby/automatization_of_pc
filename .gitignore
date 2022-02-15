@@ -15,3 +15,8 @@ web/calendar_reminders/__pycache__
 web/calendar_reminders/migrations/__pycache__
 turn_pc_on/__pycache__
 turn_pc_on/images/*
+voice_assistent/modules/VoiceAssistent/__pycache__
+voice_assistent/modules/VoiceAssistent/errors/__pycache__
+voice_assistent/modules/VoiceAssistent/voice.mp3
+
+
