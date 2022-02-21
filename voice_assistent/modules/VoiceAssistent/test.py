@@ -3,6 +3,7 @@ import json
 
 assistent = VoiceAssistent.VoiceAssistent("wake")
 
-
-audio = assistent.get_audio()
-assistent.speak(audio)
+try:
+    assistent.close_code()
+except Exception as e:
+    print(e)
