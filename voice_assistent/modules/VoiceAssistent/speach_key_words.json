@@ -1,9 +1,0 @@
-{
-    "open": ["open", "start"],
-    "close": ["close", "kill", "exit"],
-    "apps": {
-        "code": ["code", "vs code"],
-        "google_chrome": ["google", "chrome"],
-        "spotify": ["spotify"]
-    }
-}

@@ -36,10 +36,6 @@ create_credentials()
 * All of your events and reminders must be backed up on iCloud.
 * pyicloud may raise this error: Authentication required for Account. (421) <br> fix <a href="Authentication required for Account. (421)">here</a>
 
-### Voice assistent:
-* Small voice assistent that will bring together all of the functions in this project. Can be used instead of the web interface.
-* Some Windows users may run into issues with installing PyAudio library. If this happens to you, please visit this <a href='https://www.lfd.uci.edu/~gohlke/pythonlibs/#pyaudio'>site</a> and download version coresponding with your Python instalations
-
 ## IDEAS:
 * Add playing on more devices at once (currently not possible because of Spotify's API)
 * Redo device finding on Spotify
