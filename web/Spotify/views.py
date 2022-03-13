@@ -19,15 +19,12 @@ track_obj = modules.Spotify.Track.Track()
 current_track_obj = modules.Spotify.CurrentTrack.CurrentTrack()
 
 devices_name = device_obj.get_all_names()
-active_device = active_device_obj.update_active_device("None")
 
 # Create your views here.
 
 
 def index(request):
-    active_device = active_device_obj.get_active_device()
-
-    if active_device != "None":
+    if active_device_obj.get_active_device() != "None":
         volume_percent = active_device_obj.get_volume()
     else:
         volume_percent = "None"
@@ -47,7 +44,7 @@ def index(request):
     content = {
         "num_of_devices": len(devices_name),
         "devices_name": devices_name,
-        "active_device": active_device,
+        "active_device": active_device_obj.get_active_device(),
         "playing_track": playing_track,
         "cover_of_track": cover_of_track,
         "volume_percent": volume_percent,
