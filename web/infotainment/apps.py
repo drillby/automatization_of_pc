@@ -1,6 +1,6 @@
 from django.apps import AppConfig
 
 
-class CalendarRemindersConfig(AppConfig):
+class InfotainmentConfig(AppConfig):
     default_auto_field = 'django.db.models.BigAutoField'
-    name = 'calendar_reminders'
+    name = 'infotainment'
