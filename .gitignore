@@ -11,7 +11,5 @@ tekore.cfg
 web/infotainment/__pycache__
 web/infotainment/migrations/__pycache__
 web/OpenWeather_API_key.cfg
-web/modules/Infotainment/Weather/OpenWeather_API_key.cfg
-web/modules/Infotainment/Geocoding/OpenWeather_API_key.cfg
-web/modules/Infotainment/Weather/__pycache__
-web/modules/Infotainment/Geocoding/__pycache__
+web/modules/Infotainment/OpenWeather_API_key.cfg
+web/modules/Infotainment/__pycache__

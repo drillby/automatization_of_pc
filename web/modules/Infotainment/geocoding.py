@@ -25,6 +25,3 @@ class Geocoding:
             "GET", url, headers=headers, params=querystring).json()[0]
 
         return response["lat"], response["lon"]
-
-
-print(Geocoding.coord_by_city_name("Petrohrad"))
