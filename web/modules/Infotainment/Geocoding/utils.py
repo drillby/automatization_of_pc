@@ -3,7 +3,7 @@ from configparser import ConfigParser
 from os import PathLike
 
 
-def return_cfg_file(path: PathLike) -> ConfigParser:
+def parse_cfg_file(path: PathLike) -> ConfigParser:
     """Returns object for parsing configuration file
 
     Args:
