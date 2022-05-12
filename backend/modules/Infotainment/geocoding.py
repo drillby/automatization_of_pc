@@ -1,6 +1,8 @@
-import utils
-import requests
 from typing import Tuple
+
+import requests
+
+import utils
 
 
 class Geocoding:

@@ -1,14 +1,15 @@
-from json import JSONDecodeError
 import time
-from django.shortcuts import redirect, render
-from django.http import JsonResponse
-import modules.Spotify.Artist
+from json import JSONDecodeError
+
+import modules.Spotify.ActiveDevice
 import modules.Spotify.Album
+import modules.Spotify.Artist
+import modules.Spotify.CurrentTrack
+import modules.Spotify.Device
 import modules.Spotify.Playlist
 import modules.Spotify.Track
-import modules.Spotify.Device
-import modules.Spotify.ActiveDevice
-import modules.Spotify.CurrentTrack
+from django.http import JsonResponse
+from django.shortcuts import redirect, render
 
 artist_obj = modules.Spotify.Artist.Artist()
 album_obj = modules.Spotify.Album.Album()
@@ -42,14 +43,13 @@ def index(request):
         cover_of_track = "https://upload.wikimedia.org/wikipedia/commons/thumb/1/19/Spotify_logo_without_text.svg/768px-Spotify_logo_without_text.svg.png"
 
     content = {
-        "num_of_devices": len(devices_name),
         "devices_name": devices_name,
         "active_device": active_device_obj.get_active_device(),
         "playing_track": playing_track,
         "cover_of_track": cover_of_track,
         "volume_percent": volume_percent,
     }
-    return render(request, "Spotify/index.html", context=content)
+    return JsonResponse(data=content)
 
 
 def run_spotify(request):

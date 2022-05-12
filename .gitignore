@@ -1,15 +1,15 @@
 
 /test
 /.vscode
-web/modules/__pycache__
-web/modules/Spotify/__pycache__
+backend/modules/__pycache__
+backend/modules/Spotify/__pycache__
 env
-web/Spotify/__pycache__
-web/Spotify/migrations/__pycache__
-web/web/__pycache__
+backend/Spotify/__pycache__
+backend/Spotify/migrations/__pycache__
+backend/backend/__pycache__
 tekore.cfg
-web/infotainment/__pycache__
-web/infotainment/migrations/__pycache__
-web/OpenWeather_API_key.cfg
-web/modules/Infotainment/OpenWeather_API_key.cfg
-web/modules/Infotainment/__pycache__
+backend/infotainment/__pycache__
+backend/infotainment/migrations/__pycache__
+backend/OpenWeather_API_key.cfg
+backend/modules/Infotainment/OpenWeather_API_key.cfg
+backend/modules/Infotainment/__pycache__
