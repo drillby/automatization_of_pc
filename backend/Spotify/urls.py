@@ -2,8 +2,7 @@ from django.urls import path
 from . import views
 
 urlpatterns = [
-    path("", views.index, name="index"),
-    path("index", views.index, name="index"),
+    path("current_song", views.current_song, name="current_song"),
     path("run_spotify", views.run_spotify, name="run_spotify"),
     path("change_volume", views.volume, name="change_volume"),
     path(

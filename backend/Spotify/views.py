@@ -49,7 +49,32 @@ def index(request):
         "cover_of_track": cover_of_track,
         "volume_percent": volume_percent,
     }
-    return JsonResponse(data=content)
+    return JsonResponse({"response": [content]})
+
+
+def active_device(request):
+    if active_device_obj.get_active_device() != "None":
+        volume_percent = active_device_obj.get_volume()
+    else:
+        volume_percent = 0
+
+
+def current_song(request):
+    try:
+
+        (
+            playing_track,
+            cover_of_track,
+        ) = current_track_obj.get_name_and_cover()
+    except JSONDecodeError:
+        playing_track = "None"
+        cover_of_track = "https://upload.wikimedia.org/wikipedia/commons/thumb/1/19/Spotify_logo_without_text.svg/768px-Spotify_logo_without_text.svg.png"
+
+    content = {
+        "title": playing_track,
+        "cover": cover_of_track,
+    }
+    return JsonResponse({"results": [content]})
 
 
 def run_spotify(request):
