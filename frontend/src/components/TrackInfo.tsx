@@ -12,13 +12,14 @@ function TrackInfo(props: {
 				<img
 					src={loadingIcon}
 					alt=""
-					className="animate-spin outline m-auto"
+					className="animate-spin m-auto"
 					width={200}
 				/>
 			) : (
 				<div>
-					<h1>{props.song.title}</h1>
-					<img src={props.song.cover_of_track} alt="" />
+					<h1>{props.song.name}</h1>
+					<img className="m-auto" src={props.song.cover} width={300} alt="" />
+					<h1>{props.song.artist}</h1>
 				</div>
 			)}
 		</>

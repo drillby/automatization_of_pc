@@ -1,6 +1,6 @@
 type activeDeviceType = {
 	name: string;
-	volume: number;
+	volume: string;
 };
 
 export default activeDeviceType;

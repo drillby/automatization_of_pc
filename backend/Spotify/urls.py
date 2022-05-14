@@ -3,6 +3,10 @@ from . import views
 
 urlpatterns = [
     path("current_song", views.current_song, name="current_song"),
+    path("current_artist", views.current_artist, name="current_artist"),
+    path("active_device", views.active_device, name="active_device"),
+    path("current_info", views.current_info, name="current_info"),
+
     path("run_spotify", views.run_spotify, name="run_spotify"),
     path("change_volume", views.volume, name="change_volume"),
     path(

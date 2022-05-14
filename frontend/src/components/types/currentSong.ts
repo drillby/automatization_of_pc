@@ -1,6 +1,7 @@
 type SongType = {
-	title: string;
-	cover_of_track: string;
+	name: string;
+	artist: string;
+	cover: string;
 };
 
 export default SongType;

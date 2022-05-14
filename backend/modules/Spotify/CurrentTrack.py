@@ -36,6 +36,15 @@ class CurrentTrack:
         else:
             return
 
+    def get_artist_name(self) -> str:
+        """Will return the name of the artist currently playing
+
+        Returns:
+            str: Name of the artist currently playing
+        """
+        json = self.get_track_info()
+        return json["item"]["album"]["artists"][0]["name"]
+
     def get_name_and_cover(self) -> tuple:
         """Will return the name and cover of the currently playing track
 
@@ -100,3 +109,7 @@ class CurrentTrack:
             spotify.playback_queue_add(uri=uris[uri], device_id=device_id)
 
         return
+
+
+if __name__ == "__main__":
+    print(CurrentTrack().get_track_info())

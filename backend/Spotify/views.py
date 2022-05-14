@@ -1,3 +1,4 @@
+import datetime
 import time
 from json import JSONDecodeError
 
@@ -24,13 +25,22 @@ devices_name = device_obj.get_all_names()
 # Create your views here.
 
 
-def index(request):
+def current_artist(request):
+    try:
+        artist = current_track_obj.get_artist_name()
+        print(artist)
+        return JsonResponse(data={'artist': artist}, safe=False)
+    except JSONDecodeError:
+        return JsonResponse(data={'artist': "None"}, safe=False)
+
+
+def current_info(request):
     if active_device_obj.get_active_device() != "None":
         volume_percent = active_device_obj.get_volume()
     else:
         volume_percent = "None"
 
-    time.sleep(1)
+    # time.sleep(1)
 
     try:
 
@@ -38,18 +48,25 @@ def index(request):
             playing_track,
             cover_of_track,
         ) = current_track_obj.get_name_and_cover()
-    except JSONDecodeError:
+        current_artist = current_track_obj.get_artist_name()
+    except Exception:
         playing_track = "None"
+        current_artist = "None"
         cover_of_track = "https://upload.wikimedia.org/wikipedia/commons/thumb/1/19/Spotify_logo_without_text.svg/768px-Spotify_logo_without_text.svg.png"
 
     content = {
-        "devices_name": devices_name,
-        "active_device": active_device_obj.get_active_device(),
-        "playing_track": playing_track,
-        "cover_of_track": cover_of_track,
-        "volume_percent": volume_percent,
+        "active_device": {
+            "name": active_device_obj.get_active_device(),
+            "volume": volume_percent,
+        },
+        "current_track": {
+            "name": playing_track,
+            "artist": current_artist,
+            "cover": cover_of_track,
+        },
     }
-    return JsonResponse({"response": [content]})
+
+    return JsonResponse({"results": [content]})
 
 
 def active_device(request):
@@ -57,6 +74,21 @@ def active_device(request):
         volume_percent = active_device_obj.get_volume()
     else:
         volume_percent = 0
+
+    content = {
+        "active_device": active_device_obj.get_active_device(),
+        "volume_percent": volume_percent,
+    }
+    return JsonResponse({"results": [content]})
+
+
+def update_volume(request):
+    volume = request.GET["desired_volume"]
+    active_device_obj.change_volume(volume)
+
+    return JsonResponse(
+        {"response": [{"volume": active_device_obj.get_volume()}]}
+    )
 
 
 def current_song(request):
@@ -71,7 +103,7 @@ def current_song(request):
         cover_of_track = "https://upload.wikimedia.org/wikipedia/commons/thumb/1/19/Spotify_logo_without_text.svg/768px-Spotify_logo_without_text.svg.png"
 
     content = {
-        "title": playing_track,
+        "name": playing_track,
         "cover": cover_of_track,
     }
     return JsonResponse({"results": [content]})
