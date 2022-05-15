@@ -51,7 +51,7 @@ def current_info(request):
         current_artist = current_track_obj.get_artist_name()
     except Exception:
         playing_track = "None"
-        current_artist = "None"
+        current_artist = ""
         cover_of_track = "https://upload.wikimedia.org/wikipedia/commons/thumb/1/19/Spotify_logo_without_text.svg/768px-Spotify_logo_without_text.svg.png"
 
     content = {

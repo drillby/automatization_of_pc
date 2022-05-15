@@ -1,9 +1,10 @@
 import "./index.css";
 import TrackInfo from "./components/TrackInfo";
 import { useEffect, useState, useMemo } from "react";
-import API from "./components/functions/APIClient";
-import changingInfoType from "./components/types/changingInfo";
-import changeHeadInfo from "./components/functions/changeHead";
+import API from "./functions/APIClient";
+import changingInfoType from "./types/changingInfo";
+import changeHeadInfo from "./functions/changeHead";
+import ActiveDevice from "./components/ActiveDevice";
 
 function App(): JSX.Element {
 	// wrap API in useMemo to avoid unnecessary re-renders
@@ -46,6 +47,7 @@ function App(): JSX.Element {
 	return (
 		<div className="w-4/5 m-auto text-center">
 			<TrackInfo song={changingInfo[0].current_track} loading={loading} />
+			<ActiveDevice device={changingInfo[0].active_device}/>
 		</div>
 	);
 }

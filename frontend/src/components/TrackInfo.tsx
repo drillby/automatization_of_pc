@@ -1,5 +1,5 @@
 import React from "react";
-import currentSongType from "./types/currentSong";
+import currentSongType from "../types/currentSong";
 import loadingIcon from "../svgs/loading.svg";
 
 function TrackInfo(props: {
@@ -16,10 +16,20 @@ function TrackInfo(props: {
 					width={200}
 				/>
 			) : (
-				<div>
-					<h1>{props.song.name}</h1>
-					<img className="m-auto" src={props.song.cover} width={300} alt="" />
-					<h1>{props.song.artist}</h1>
+				<div className="mt-8">
+					{props.song.artist !== "" ? (
+						<h1 className="text-xl font-bold">
+							Právě hraje "{props.song.name}" od {props.song.artist}
+						</h1>
+					) : (
+						<h1 className="text-xl font-bold">Momentálně nic nehraje</h1>
+					)}
+					<img
+						className="m-auto mt-4"
+						src={props.song.cover}
+						width={300}
+						alt=""
+					/>
 				</div>
 			)}
 		</>
