@@ -59,7 +59,7 @@ function App(): JSX.Element {
 				<div className="w-1/5 m-auto text-center">
 					<TrackInfo song={changingInfo[0].current_track} loading={loading} />
 					<ActiveDevice device={changingInfo[0].active_device} />
-					<Play />
+					<Play api={api} />
 				</div>
 			)}
 		</>

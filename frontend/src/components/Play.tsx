@@ -2,12 +2,13 @@ import React from "react";
 import { useState } from "react";
 import { AiOutlineCaretDown } from "react-icons/ai";
 import { AiOutlineCaretUp } from "react-icons/ai";
+import API from "../functions/APIClient";
 import PlayActive from "./PlayActive";
 
-function PlaySong() {
+function PlaySong(props: { api: API }) {
 	const [active, setActive] = useState(false);
 
-	return <div>{PlaySelector()}</div>;
+	return <>{PlaySelector()}</>;
 
 	function PlaySelector() {
 		return (
@@ -22,7 +23,9 @@ function PlaySong() {
 						</td>
 					</tr>
 					<tr>
-						<td className="bg-white">{active && <PlayActive />}</td>
+						<td className="bg-white">
+							{active && <PlayActive api={props.api} />}
+						</td>
 						<td className="bg-white"></td>
 					</tr>
 				</tbody>

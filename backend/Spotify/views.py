@@ -1,4 +1,5 @@
 import datetime
+import json
 import time
 from json import JSONDecodeError
 
@@ -10,7 +11,7 @@ import modules.Spotify.Device
 import modules.Spotify.Playlist
 import modules.Spotify.Track
 from django.http import JsonResponse
-from django.shortcuts import redirect, render
+from django.shortcuts import redirect
 
 artist_obj = modules.Spotify.Artist.Artist()
 album_obj = modules.Spotify.Album.Album()
@@ -20,9 +21,34 @@ active_device_obj = modules.Spotify.ActiveDevice.ActiveDevice()
 track_obj = modules.Spotify.Track.Track()
 current_track_obj = modules.Spotify.CurrentTrack.CurrentTrack()
 
-devices_name = device_obj.get_all_names()
 
 # Create your views here.
+
+def start_playback(request):
+    data = json.loads(request.body)
+    device = data["device_name"]
+    play_type = data["play_type"]
+    name = data["name"]
+
+    if device == "":
+        device = active_device_obj.get_active_device()
+    else:
+        active_device_obj.update_active_device(device)
+
+    if play_type == "song":
+        track_obj.play(name, device)
+    elif play_type == "artist":
+        artist_obj.play(name, device)
+    elif play_type == "album":
+        album_obj.play(name, device)
+    elif play_type == "playlist":
+        playlist_obj.play(name, device)
+
+    return JsonResponse(data={"response": [{"status": "success"}]}, safe=False)
+
+
+def playable_devices(request):
+    return JsonResponse(data={'devices': device_obj.get_all_names()}, safe=False)
 
 
 def current_artist(request):
@@ -83,7 +109,7 @@ def active_device(request):
 
 
 def update_volume(request):
-    volume = request.GET["desired_volume"]
+    volume = request.POST["desired_volume"]
     active_device_obj.change_volume(volume)
 
     return JsonResponse(
@@ -110,8 +136,8 @@ def current_song(request):
 
 
 def run_spotify(request):
-    device = request.GET["device"]
-    text = request.GET["name"]
+    device = request.POST["device"]
+    text = request.POST["name"]
 
     if device == "":
         device = active_device_obj.get_active_device()
@@ -151,7 +177,7 @@ def run_spotify(request):
 
 
 def volume(request):
-    volume = request.GET["desired_volume"]
+    volume = request.POST["desired_volume"]
 
     if volume.isnumeric():
         active_device_obj.change_volume(volume)
@@ -162,8 +188,8 @@ def volume(request):
 
 
 def add_to_queue(request):
-    number = request.GET["num_to_queue"]
-    device = request.GET["device"]
+    number = request.POST["num_to_queue"]
+    device = request.POST["device"]
 
     if number.isnumeric():
         current_track_obj.add_recomended_to_queue(device, number)
