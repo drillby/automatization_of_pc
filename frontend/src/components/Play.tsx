@@ -14,7 +14,10 @@ function PlaySong(props: { api: API }) {
 		return (
 			<table className="w-full mt-4 h-8 outline bg-slate-100">
 				<tbody>
-					<tr onClick={() => setActive(!active)}>
+					<tr
+						onClick={() => setActive(!active)}
+						className="hover:cursor-pointer"
+					>
 						<td>
 							<h1 className="text-left pl-2 font-medium h-8 pt-1">Přehrát</h1>
 						</td>
@@ -24,7 +27,7 @@ function PlaySong(props: { api: API }) {
 					</tr>
 					<tr>
 						<td className="bg-white">
-							{active && <PlayActive api={props.api} />}
+							{active && <PlayActive api={props.api} state={setActive} />}
 						</td>
 						<td className="bg-white"></td>
 					</tr>

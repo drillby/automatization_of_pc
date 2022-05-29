@@ -1,4 +1,3 @@
-import datetime
 import json
 import time
 from json import JSONDecodeError
@@ -23,6 +22,7 @@ current_track_obj = modules.Spotify.CurrentTrack.CurrentTrack()
 
 
 # Create your views here.
+
 
 def start_playback(request):
     data = json.loads(request.body)
@@ -188,8 +188,8 @@ def volume(request):
 
 
 def add_to_queue(request):
-    number = request.POST["num_to_queue"]
-    device = request.POST["device"]
+    number = request.GET["num_to_queue"]
+    device = request.GET["device"]
 
     if number.isnumeric():
         current_track_obj.add_recomended_to_queue(device, number)

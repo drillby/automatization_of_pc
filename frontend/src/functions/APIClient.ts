@@ -5,16 +5,6 @@ class API {
 	#port = "23450";
 	#fullUrl = this.#url + ":" + this.#port;
 
-	#getCooke(name: string): string {
-		const cookie = document.cookie
-			.split(";")
-			.find((c) => c.trim().startsWith(name));
-		if (!cookie) {
-			return "";
-		}
-		return cookie.split("=")[1];
-	}
-
 	fetchCurrentSong = async () => {
 		const data = await fetch(this.#fullUrl + "/spotify/current_song", {
 			method: "GET",
@@ -52,11 +42,10 @@ class API {
 	};
 
 	startPlayback = async (content: playbackInfo) => {
-		fetch(this.#fullUrl + "/spotify/start_playback", {
+		const res = await fetch(this.#fullUrl + "/spotify/start_playback", {
 			method: "POST",
 			headers: {
 				"Content-Type": "application/json",
-				// "X-CSRFToken": this.#getCooke("csrftoken"),
 			},
 			body: JSON.stringify({
 				device_name: content.deviceName,
@@ -64,6 +53,9 @@ class API {
 				name: content.name,
 			}),
 		});
+		const json = await res.json();
+
+		return json;
 	};
 }
 

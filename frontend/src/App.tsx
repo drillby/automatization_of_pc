@@ -7,6 +7,7 @@ import changeHeadInfo from "./functions/changeHead";
 import ActiveDevice from "./components/ActiveDevice";
 import loadingIcon from "./svgs/loading.svg";
 import Play from "./components/Play";
+import VolumeSlider from "./components/VolumeSlider";
 
 function App(): JSX.Element {
 	// wrap API in useMemo to avoid unnecessary re-renders
@@ -59,6 +60,7 @@ function App(): JSX.Element {
 				<div className="w-1/5 m-auto text-center">
 					<TrackInfo song={changingInfo[0].current_track} loading={loading} />
 					<ActiveDevice device={changingInfo[0].active_device} />
+					<VolumeSlider api={api} />
 					<Play api={api} />
 				</div>
 			)}

@@ -2,7 +2,10 @@ import React from "react";
 import API from "../functions/APIClient";
 import { useState, useEffect } from "react";
 
-function PlayActive(props: { api: API }) {
+function PlayActive(props: {
+	api: API;
+	state: React.Dispatch<React.SetStateAction<boolean>>;
+}) {
 	const [playableDevices, setPlayableDevices] = useState<string[]>([]);
 
 	useEffect(() => {
@@ -14,14 +17,17 @@ function PlayActive(props: { api: API }) {
 		getPlayableDevices();
 	}, [props.api]);
 
-	const onSubmit = (event: React.FormEvent<HTMLFormElement>) => {
-		event.preventDefault();
+	const onSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
 		const form = event.target as HTMLFormElement;
 		const formData = new FormData(form);
 		const deviceName = formData.get("device") as string;
 		const playType = formData.get("type_of_play") as string;
 		const name = formData.get("name") as string;
-		props.api.startPlayback({ deviceName, playType, name });
+		event.preventDefault();
+		const call = props.api.startPlayback({ deviceName, playType, name });
+		if (await call) {
+			props.state(false);
+		}
 	};
 
 	return (
@@ -82,7 +88,7 @@ function PlayActive(props: { api: API }) {
 							name="submit"
 							id="submit"
 							value="Zpracovat"
-							className="outline mt-4 w-8/12 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+							className="outline mt-4 w-8/12 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline mb-4"
 						/>
 					</div>
 				</div>
