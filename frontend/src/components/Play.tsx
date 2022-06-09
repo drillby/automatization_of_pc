@@ -25,12 +25,14 @@ function PlaySong(props: { api: API }) {
 							{active ? <AiOutlineCaretUp /> : <AiOutlineCaretDown />}
 						</td>
 					</tr>
-					<tr>
-						<td className="bg-white">
-							{active && <PlayActive api={props.api} state={setActive} />}
-						</td>
-						<td className="bg-white"></td>
-					</tr>
+					{active && (
+						<tr>
+							<td className="bg-white">
+								<PlayActive api={props.api} state={setActive} />
+							</td>
+							<td className="bg-white"></td>
+						</tr>
+					)}
 				</tbody>
 			</table>
 		);

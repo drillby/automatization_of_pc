@@ -8,6 +8,7 @@ import ActiveDevice from "./components/ActiveDevice";
 import loadingIcon from "./svgs/loading.svg";
 import Play from "./components/Play";
 import VolumeSlider from "./components/VolumeSlider";
+import QueueAdder from "./components/QueueAdder";
 
 function App(): JSX.Element {
 	// wrap API in useMemo to avoid unnecessary re-renders
@@ -65,6 +66,7 @@ function App(): JSX.Element {
 						volume={changingInfo[0].active_device.volume}
 					/>
 					<Play api={api} />
+					<QueueAdder api={api} />
 				</div>
 			)}
 		</>
