@@ -72,6 +72,21 @@ class API {
 
 		return json;
 	}
+
+	addSongsToQueue = async (songs: string) => {
+		const res = await fetch(this.#fullUrl + "/spotify/add_songs_to_queue", {
+			method: "POST",
+			headers: {
+				"Content-Type": "application/json",
+			},
+			body: JSON.stringify({
+				songs: songs,
+			}),
+		});
+		const json = await res.json();
+
+		return json;
+	}
 }
 
 export default API;

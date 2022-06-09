@@ -58,7 +58,7 @@ function App(): JSX.Element {
 					alt=""
 				/>
 			) : (
-				<div className="w-3/4 m-auto text-center xl:w-1/4">
+				<div className="w-3/4 m-auto text-center xl:w-1/4 mb-12">
 					<TrackInfo song={changingInfo[0].current_track} loading={loading} />
 					<ActiveDevice device={changingInfo[0].active_device} />
 					<VolumeSlider

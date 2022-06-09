@@ -63,6 +63,16 @@ def set_volume(request):
     return JsonResponse(data={"response": {"status": "success"}}, safe=False)
 
 
+def add_songs_to_queue(request):
+    data = json.loads(request.body)
+
+    current_track_obj.add_recomended_to_queue(
+        active_device_obj.get_active_device(),
+        data["num_to_queue"],)
+
+    return JsonResponse(data={"response": [{"status": "success"}]}, safe=False)
+
+
 def current_artist(request):
     try:
         artist = current_track_obj.get_artist_name()
