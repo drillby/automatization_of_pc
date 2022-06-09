@@ -35,6 +35,8 @@ def start_playback(request):
     else:
         active_device_obj.update_active_device(device)
 
+    print(active_device_obj.get_active_device())
+
     if play_type == "song":
         track_obj.play(name, device)
     elif play_type == "artist":
@@ -49,6 +51,16 @@ def start_playback(request):
 
 def playable_devices(request):
     return JsonResponse(data={'devices': device_obj.get_all_names()}, safe=False)
+
+
+def set_volume(request):
+    data = json.loads(request.body)
+    volume = data["volume"]
+
+    if volume.isnumeric():
+        active_device_obj.change_volume(int(volume))
+
+    return JsonResponse(data={"response": {"status": "success"}}, safe=False)
 
 
 def current_artist(request):
@@ -67,6 +79,7 @@ def current_info(request):
         volume_percent = "None"
 
     # time.sleep(1)
+    # print(active_device_obj.name)
 
     try:
 

@@ -16,7 +16,7 @@ function PlaySong(props: { api: API }) {
 				<tbody>
 					<tr
 						onClick={() => setActive(!active)}
-						className="hover:cursor-pointer"
+						className="hover:cursor-pointer hover:bg-slate-400"
 					>
 						<td>
 							<h1 className="text-left pl-2 font-medium h-8 pt-1">Přehrát</h1>

@@ -35,3 +35,27 @@ Since I will be using this server only on LAN I will expose my secret key, but i
 
 So far I am hosting a server on my PC using Django library. Soon I will be hosting a server on RaspberryPi or Synology NAS if possible.
 To change Django to your local network go into web/web/setting.py and change content of ALLOWED_HOSTS from localhost to some of your LAN IP
+
+## Running server:
+
+You need to run this server. To do this run <br>
+
+```python
+python manage.py runserver [your_ip_address:port]
+```
+
+and you will be able to access your server on http://[your_ip_address]:[port]/
+
+You also need to run frond-end server. To do this run <br>
+
+```js
+npm start
+```
+
+This will start a developer server on http://localhost:3000/ and your ip_address:3000/
+
+For running build server run <br>
+
+```js
+server -s build
+```

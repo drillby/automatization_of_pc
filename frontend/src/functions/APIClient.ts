@@ -57,6 +57,21 @@ class API {
 
 		return json;
 	};
+
+	setVolume = async (volume: string) => {
+		const res = await fetch(this.#fullUrl + "/spotify/set_volume", {
+			method: "POST",
+			headers: {
+				"Content-Type": "application/json",
+			},
+			body: JSON.stringify({
+				volume: volume,
+			}),
+		});
+		const json = await res.json();
+
+		return json;
+	}
 }
 
 export default API;

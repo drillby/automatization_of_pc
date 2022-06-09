@@ -31,10 +31,10 @@ function PlayActive(props: {
 	};
 
 	return (
-		<div>
+		<div className="">
 			<form action="" method="POST" onSubmit={onSubmit}>
-				<div className="flex flex-row">
-					<div className="w-1/2">
+				<div className="sm:flex sm:flex-row">
+					<div className="sm:w-1/2 w-full">
 						<label
 							className="block text-gray-700 text-sm font-bold mb-2"
 							htmlFor="device"
@@ -50,7 +50,7 @@ function PlayActive(props: {
 							))}
 						</select>
 					</div>
-					<div className="w-1/2">
+					<div className="sm:w-1/2 w-full">
 						<label
 							className="block text-gray-700 text-sm font-bold mb-2"
 							htmlFor="type_of_play"
@@ -75,7 +75,7 @@ function PlayActive(props: {
 							Název
 						</label>
 						<input
-							className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+							className="shadow appearance-none border rounded w-11/12 py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
 							type="text"
 							placeholder="Název"
 							id="name"
