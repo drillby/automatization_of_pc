@@ -46,7 +46,8 @@ class Track:
 
         track = self.search(track_name)
         device_id = Device.get_id(device)
-        spotify.playback_start_tracks([track.id], device_id=device_id, position_ms=0)
+        spotify.playback_start_tracks(
+            [track.id], device_id=device_id, position_ms=0)
         return
 
     def shuffle(self, boolean: bool = True) -> None:

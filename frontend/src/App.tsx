@@ -39,11 +39,11 @@ function App(): JSX.Element {
 					setLoading(false);
 				});
 			};
-			getChangingSong();
 			changeHeadInfo(
 				changingInfo[0].current_track.name,
 				changingInfo[0].current_track.cover
 			);
+			getChangingSong();
 		}, 5000);
 		return () => clearInterval(id);
 	}, [api, changingInfo]);

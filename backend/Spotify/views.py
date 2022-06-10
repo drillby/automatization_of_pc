@@ -35,8 +35,6 @@ def start_playback(request):
     else:
         active_device_obj.update_active_device(device)
 
-    print(active_device_obj.get_active_device())
-
     if play_type == "song":
         track_obj.play(name, device)
     elif play_type == "artist":
@@ -78,7 +76,6 @@ def add_songs_to_queue(request):
 def current_artist(request):
     try:
         artist = current_track_obj.get_artist_name()
-        print(artist)
         return JsonResponse(data={'artist': artist}, safe=False)
     except JSONDecodeError:
         return JsonResponse(data={'artist': "None"}, safe=False)
@@ -136,6 +133,11 @@ def active_device(request):
 def update_volume(request):
     volume = request.POST["desired_volume"]
     active_device_obj.change_volume(volume)
+
+    if volume < 0:
+        volume = 0
+    elif volume > 100:
+        volume = 100
 
     return JsonResponse(
         {"response": [{"volume": active_device_obj.get_volume()}]}

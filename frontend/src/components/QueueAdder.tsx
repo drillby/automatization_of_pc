@@ -6,11 +6,11 @@ import QueueAdderActive from "./QueueAdderActive";
 function QueueAdder(props: { api: API }) {
 	const [active, setActive] = useState(false);
 	return (
-		<table className="w-full mt-4 h-8 outline bg-slate-100">
+		<table className="w-full mt-4 h-8 outline bg-slate-300">
 			<tbody>
 				<tr
 					onClick={() => setActive(!active)}
-					className="hover:cursor-pointer hover:bg-slate-400"
+					className="hover:cursor-pointer hover:bg-slate-400 duration-500"
 				>
 					<td>
 						<h1 className="text-left pl-2 font-medium h-8 pt-1">

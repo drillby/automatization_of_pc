@@ -27,7 +27,7 @@ function VolumeSlider(props: { api: API; volume: string }) {
 					<tr>
 						<td>
 							<button
-								className="outline rounded-sm w-6 h-6 bg-slate-100 hover:bg-slate-400 mr-2"
+								className="outline rounded-sm w-6 h-6 bg-slate-300 hover:bg-slate-400 mr-2 duration-500"
 								onClick={() => {
 									setVolume((parseInt(volume) - 10).toString());
 									props.api.setVolume(volume);
@@ -59,7 +59,7 @@ function VolumeSlider(props: { api: API; volume: string }) {
 						<td>100</td>
 						<td>
 							<button
-								className="outline rounded-sm w-6 h-6 bg-slate-100 hover:bg-slate-400 ml-2"
+								className="outline rounded-sm w-6 h-6 bg-slate-300 hover:bg-slate-400 ml-2 duration-500"
 								onClick={() => {
 									setVolume((parseInt(volume) + 10).toString());
 									props.api.setVolume(volume);
