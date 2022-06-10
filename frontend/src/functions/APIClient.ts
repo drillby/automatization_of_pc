@@ -80,7 +80,7 @@ class API {
 				"Content-Type": "application/json",
 			},
 			body: JSON.stringify({
-				songs: songs,
+				num_to_queue: songs,
 			}),
 		});
 		const json = await res.json();
