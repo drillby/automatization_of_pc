@@ -16,4 +16,5 @@ urlpatterns = [
     ),
     path("live_update", views.live_update, name="live_update"),
     path("set_volume", views.set_volume, name="set_volume"),
+    path("add_songs_to_queue", views.add_songs_to_queue, name="add_songs_to_queue"),
 ]

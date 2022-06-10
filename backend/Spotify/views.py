@@ -45,6 +45,8 @@ def start_playback(request):
         album_obj.play(name, device)
     elif play_type == "playlist":
         playlist_obj.play(name, device)
+    elif play_type == "queue":
+        track_obj.add_to_queue(name)
 
     return JsonResponse(data={"response": [{"status": "success"}]}, safe=False)
 
@@ -68,7 +70,7 @@ def add_songs_to_queue(request):
 
     current_track_obj.add_recomended_to_queue(
         active_device_obj.get_active_device(),
-        data["num_to_queue"],)
+        int(data["num_to_queue"]),)
 
     return JsonResponse(data={"response": [{"status": "success"}]}, safe=False)
 
