@@ -5,7 +5,7 @@ import API from "../functions/SpotifyApp/APIClient";
 import changingInfoType from "../types/SpotifyTypes/changingInfo";
 import changeHeadInfo from "../functions/SpotifyApp/changeHead";
 import ActiveDevice from "../components/SpotifyApp/InformationComponents/ActiveDevice";
-import loadingIcon from "../svgs/loading.svg";
+import loadingIcon from "../svgs/find-magnifier-magnifying-glass-svgrepo-com.svg";
 import Play from "../components/SpotifyApp/PlaybackComponents/Play";
 import VolumeSlider from "../components/SpotifyApp/VolumeSliderComponents/VolumeSlider";
 import QueueAdder from "../components/SpotifyApp/QueueAdderComponents/QueueAdder";
@@ -52,8 +52,8 @@ function App(): JSX.Element {
 		<>
 			{loading ? (
 				<img
-					className="animate-spin m-auto mt-40"
-					width={500}
+					className="sm:animation-loading-spotify m-auto mt-40 animate-pulse"
+					width={200}
 					src={loadingIcon}
 					alt=""
 				/>

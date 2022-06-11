@@ -1,3 +1,30 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer components {
+	.animation-loading-spotify {
+		animation: loading-spotify 5s infinite;
+	}
+
+	@keyframes loading-spotify {
+		0.0% {
+			transform: translate(0vh, 0vh);
+		}
+		100% {
+			transform: translate(0vh, 0vh);
+		}
+		19.5% {
+			transform: translate(40vh, 60vh);
+		}
+		39.6% {
+			transform: translate(60vh, 40vh);
+		}
+		60.1% {
+			transform: translate(30vh, 20vh);
+		}
+		79.9% {
+			transform: translate(-30vh, 0vh);
+		}
+	}
+}

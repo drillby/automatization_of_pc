@@ -5,6 +5,7 @@ import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import Spotify from "./pages/Spotify";
+import Tests from "./pages/Tests";
 
 const root = ReactDOM.createRoot(
 	document.getElementById("root") as HTMLElement
@@ -16,6 +17,7 @@ root.render(
 			<Routes>
 				<Route path="/" element={<App />} />
 				<Route path="/spotify" element={<Spotify />} />
+				<Route path="/dev" element={<Tests />} />
 			</Routes>
 		</Router>
 	</React.StrictMode>
