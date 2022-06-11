@@ -1,5 +1,5 @@
 import React from "react";
-import API from "../functions/APIClient";
+import API from "../../../functions/SpotifyApp/APIClient";
 import { useState, useEffect } from "react";
 
 function VolumeSlider(props: { api: API; volume: string }) {

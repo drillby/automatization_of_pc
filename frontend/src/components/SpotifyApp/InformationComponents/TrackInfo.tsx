@@ -1,5 +1,5 @@
 import React from "react";
-import currentSongType from "../types/currentSong";
+import currentSongType from "../../../types/SpotifyTypes/currentSong";
 
 function TrackInfo(props: {
 	song: currentSongType;

@@ -1,14 +1,14 @@
 import "./index.css";
-import TrackInfo from "./components/TrackInfo";
+import TrackInfo from "./components/SpotifyApp/InformationComponents/TrackInfo";
 import { useEffect, useState, useMemo } from "react";
-import API from "./functions/APIClient";
-import changingInfoType from "./types/changingInfo";
-import changeHeadInfo from "./functions/changeHead";
-import ActiveDevice from "./components/ActiveDevice";
+import API from "./functions/SpotifyApp/APIClient";
+import changingInfoType from "./types/SpotifyTypes/changingInfo";
+import changeHeadInfo from "./functions/SpotifyApp/changeHead";
+import ActiveDevice from "./components/SpotifyApp/InformationComponents/ActiveDevice";
 import loadingIcon from "./svgs/loading.svg";
-import Play from "./components/Play";
-import VolumeSlider from "./components/VolumeSlider";
-import QueueAdder from "./components/QueueAdder";
+import Play from "./components/SpotifyApp/PlaybackComponents/Play";
+import VolumeSlider from "./components/SpotifyApp/VolumeSliderComponents/VolumeSlider";
+import QueueAdder from "./components/SpotifyApp/QueueAdderComponents/QueueAdder";
 
 function App(): JSX.Element {
 	// wrap API in useMemo to avoid unnecessary re-renders

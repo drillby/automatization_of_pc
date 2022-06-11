@@ -1,5 +1,5 @@
 import React from "react";
-import activeDeviceType from "../types/activeDevice";
+import activeDeviceType from "../../../types/SpotifyTypes/activeDevice";
 
 function ActiveDevice(props: { device: activeDeviceType }) {
 	return (

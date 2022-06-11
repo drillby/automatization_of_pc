@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { AiOutlineCaretDown, AiOutlineCaretUp } from "react-icons/ai";
-import API from "../functions/APIClient";
+import API from "../../../functions/SpotifyApp/APIClient";
 import QueueAdderActive from "./QueueAdderActive";
 
 function QueueAdder(props: { api: API }) {

@@ -2,7 +2,7 @@ import React from "react";
 import { useState } from "react";
 import { AiOutlineCaretDown } from "react-icons/ai";
 import { AiOutlineCaretUp } from "react-icons/ai";
-import API from "../functions/APIClient";
+import API from "../../../functions/SpotifyApp/APIClient";
 import PlayActive from "./PlayActive";
 
 function PlaySong(props: { api: API }) {

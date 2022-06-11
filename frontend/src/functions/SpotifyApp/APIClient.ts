@@ -1,4 +1,4 @@
-import playbackInfo from "../types/playbackInfo";
+import playbackInfo from "../../types/SpotifyTypes/playbackInfo";
 
 class API {
 	#url = "http://192.168.132.102";
