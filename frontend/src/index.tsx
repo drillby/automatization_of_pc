@@ -3,23 +3,13 @@ import ReactDOM from "react-dom/client";
 import "./index.css";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
-import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
-import Spotify from "./pages/Spotify";
-import Tests from "./pages/Tests";
 
 const root = ReactDOM.createRoot(
 	document.getElementById("root") as HTMLElement
 );
 root.render(
 	<React.StrictMode>
-		{/* <App /> */}
-		<Router>
-			<Routes>
-				<Route path="/" element={<App />} />
-				<Route path="/spotify" element={<Spotify />} />
-				<Route path="/dev" element={<Tests />} />
-			</Routes>
-		</Router>
+		<App />
 	</React.StrictMode>
 );
 
