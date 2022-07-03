@@ -1,8 +1,7 @@
 import React from "react";
-import API from "../../../functions/InfotainmentApp/APIClient";
 import useDate from "../../../hooks/useDate";
 
-function TimeShower(props: { api: API }) {
+function TimeShower() {
 	const { date, time, wish } = useDate(1000);
 	return (
 		<div>

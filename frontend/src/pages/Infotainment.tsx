@@ -4,7 +4,7 @@ import API from "../functions/InfotainmentApp/APIClient";
 
 function Infotainment() {
 	const api = useMemo(() => new API(), []);
-	return <TimeShower api={api} />;
+	return <TimeShower/>;
 }
 
 export default Infotainment;
