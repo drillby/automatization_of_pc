@@ -1,7 +1,9 @@
-import React from "react";
+import React, { useMemo, useEffect, useState } from "react";
+import API from "../functions/InfotainmentApp/APIClient";
 
 function Infotainment() {
-	return <div>Infotainment</div>;
+	const api = useMemo(() => new API(), []);
+	return <div className="outline">Infotainment</div>;
 }
 
 export default Infotainment;
