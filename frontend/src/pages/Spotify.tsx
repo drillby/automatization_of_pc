@@ -3,7 +3,7 @@ import TrackInfo from "../components/SpotifyApp/InformationComponents/TrackInfo"
 import { useEffect, useState, useMemo } from "react";
 import API from "../functions/SpotifyApp/APIClient";
 import changingInfoType from "../types/SpotifyTypes/changingInfo";
-import changeHeadInfo from "../functions/SpotifyApp/changeHead";
+import changeHeadInfo from "../functions/common/changeHead";
 import ActiveDevice from "../components/SpotifyApp/InformationComponents/ActiveDevice";
 import loadingIcon from "../svgs/find-magnifier-magnifying-glass-svgrepo-com.svg";
 import Play from "../components/SpotifyApp/PlaybackComponents/Play";
