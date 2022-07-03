@@ -50,7 +50,7 @@ def start_playback(request):
 
 
 def playable_devices(request):
-    return JsonResponse(data={'devices': device_obj.get_all_names()}, safe=False)
+    return JsonResponse(data={"devices": device_obj.get_all_names()}, safe=False)
 
 
 def set_volume(request):
@@ -68,7 +68,8 @@ def add_songs_to_queue(request):
 
     current_track_obj.add_recomended_to_queue(
         active_device_obj.get_active_device(),
-        int(data["num_to_queue"]),)
+        int(data["num_to_queue"]),
+    )
 
     return JsonResponse(data={"response": [{"status": "success"}]}, safe=False)
 
@@ -76,9 +77,9 @@ def add_songs_to_queue(request):
 def current_artist(request):
     try:
         artist = current_track_obj.get_artist_name()
-        return JsonResponse(data={'artist': artist}, safe=False)
+        return JsonResponse(data={"artist": artist}, safe=False)
     except JSONDecodeError:
-        return JsonResponse(data={'artist': "None"}, safe=False)
+        return JsonResponse(data={"artist": "None"}, safe=False)
 
 
 def current_info(request):
@@ -139,9 +140,7 @@ def update_volume(request):
     elif volume > 100:
         volume = 100
 
-    return JsonResponse(
-        {"response": [{"volume": active_device_obj.get_volume()}]}
-    )
+    return JsonResponse({"response": [{"volume": active_device_obj.get_volume()}]})
 
 
 def current_song(request):

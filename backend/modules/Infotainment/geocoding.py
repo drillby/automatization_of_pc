@@ -16,14 +16,14 @@ class Geocoding:
         Returns:
             Tuple[float, float]: lat, lon of the given city
         """
-        api_key = utils.parse_cfg_file("OpenWeather_API_key.cfg")[
-            "DEFAULT"]["api_key"]
+        api_key = utils.parse_cfg_file("OpenWeather_API_key.cfg")["DEFAULT"]["api_key"]
         url = "http://api.openweathermap.org/geo/1.0/direct"
 
         querystring = {"q": f"{str(city_name)}", "appid": f"{api_key}"}
-        headers = {'user-agent': 'vscode-restclient'}
+        headers = {"user-agent": "vscode-restclient"}
 
         response = requests.request(
-            "GET", url, headers=headers, params=querystring).json()[0]
+            "GET", url, headers=headers, params=querystring
+        ).json()[0]
 
         return response["lat"], response["lon"]
