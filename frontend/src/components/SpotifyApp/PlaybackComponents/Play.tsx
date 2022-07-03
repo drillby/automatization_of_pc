@@ -1,9 +1,8 @@
 import React from "react";
 import { useState } from "react";
-import { AiOutlineCaretDown } from "react-icons/ai";
-import { AiOutlineCaretUp } from "react-icons/ai";
 import API from "../../../functions/SpotifyApp/APIClient";
 import PlayActive from "./PlayActive";
+import { AiOutlineCaretDown, AiOutlineCaretUp } from "react-icons/ai";
 
 function PlaySong(props: { api: API }) {
 	const [active, setActive] = useState(false);
@@ -21,13 +20,13 @@ function PlaySong(props: { api: API }) {
 						<td>
 							<h1 className="text-left pl-2 font-medium h-8 pt-1">Přehrát</h1>
 						</td>
-						<td className="text-right w-6">
+						<td className="text-right w-6 outline">
 							{active ? <AiOutlineCaretUp /> : <AiOutlineCaretDown />}
 						</td>
 					</tr>
 					{active && (
 						<tr>
-							<td className="bg-white">
+							<td className="bg-white ">
 								<PlayActive api={props.api} state={setActive} />
 							</td>
 							<td className="bg-white"></td>

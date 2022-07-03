@@ -6,9 +6,7 @@ function Tests() {
 	const [isActive, setIsActive] = useState(false);
 
 	useEffect(() => {
-		console.log(isActive, "useEffect");
 		if (isActive) {
-			console.log("isActive");
 			document
 				.getElementById("colapsable-icon")
 				?.classList.remove("animation-colapsable-icon-inactive");
@@ -17,7 +15,6 @@ function Tests() {
 				?.classList.add("animation-colapsable-icon-active");
 			// permanently aply rotation to the icon
 		} else {
-			console.log("notActive");
 			document
 				.getElementById("colapsable-icon")
 				?.classList.add("animation-colapsable-icon-inactive");

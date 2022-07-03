@@ -21,6 +21,4 @@ urlpatterns = [
     path("spotify/", include("Spotify.urls")),
     path("info/", include("infotainment.urls")),
     path("infotainment/", include("infotainment.urls")),
-    path("ligts/", include("lights.urls"))
-
 ]
