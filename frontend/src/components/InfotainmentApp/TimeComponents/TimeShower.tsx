@@ -2,7 +2,7 @@ import React from "react";
 import useDate from "../../../hooks/useDate";
 
 function TimeShower() {
-	const { date, time, wish } = useDate(1000);
+	const { date, time, wish } = useDate(5 * 1000, "cs");
 	return (
 		<div>
 			<p>{date}</p>
